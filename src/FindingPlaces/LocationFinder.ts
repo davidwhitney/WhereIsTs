@@ -29,7 +29,7 @@ export class LocationFinder implements ILocationFinder {
 
         var maxDistance = nearest.Name.length / 100 * this.PercentageToleranceForMisspellings;
         var roundedDistance = Math.round(maxDistance);
-
+        
         return distance <= roundedDistance
             ? nearest
             : Loc.NotFound;

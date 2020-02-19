@@ -20,7 +20,7 @@ export class WhereIsCommand {
 
             const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;            
             var result = this._finder.Find(request.text);
-            if (result == null || Loc.NotFound) {
+            if (result == null || result == Loc.NotFound) {
                 return SlackResponse.NotFound();
             }
 

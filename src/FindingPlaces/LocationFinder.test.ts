@@ -59,14 +59,10 @@ describe("LocationFinderTests", () => {
 
         expect(result.Name).toBe("Place that exists");
     });
-    /*
 
-        [Test]
-        public void Find_AllFuzzySpellingsTooDifferent_ReturnsNotFound()
-        {
-            var result = _sut.Find("place tcbh cxasts");
+    it("Find_AllFuzzySpellingsTooDifferent_ReturnsNotFound", async () => {
+        var result = _sut.Find("pplace ttcbh cxasts");
 
-            Assert.That(result, Is.EqualTo(Location.NotFound));
-        }*/
-
+        expect(result).toBe(Loc.NotFound);
+    });
 });

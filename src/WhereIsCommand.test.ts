@@ -41,56 +41,35 @@ describe("WhereIsCommand tests", () => {
         expect(response.text).toBe("Sorry! We can't find that place either.");
     });
 
+    it("Run_KnownLocation_ReturnsLocation", async () => {
+        var request = ExpectedRequests.WhereIsFor("Foo");
+
+        var response = await _sut.execute(request);
+
+        expect(response.text).toBe("Foo");
+    });
+
+    it("Run_KnownLocation_ReturnsLocationMap", async () => {
+        var request = ExpectedRequests.WhereIsFor("Foo");
+
+        var response = await _sut.execute(request);
+
+        expect(response.attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
+    });
+
+    it("Run_KnownLocation_LocationMapHasCaption", async () => {
+        var request = ExpectedRequests.WhereIsFor("Foo");
+
+        var response = await _sut.execute(request);
+
+        expect(response.attachments[0].text).toBe("Foo is marked on the map.");
+    });
+
+    it("Run_MisspeltLocation_ReturnsLocation", async () => {
+        var request = ExpectedRequests.WhereIsFor("Fop");
+
+        var response = await _sut.execute(request);
+
+        expect(response.text).toBe("Foo");
+    });
 });
-
-/*       
-
-        [Test]
-        public async Task Run_KnownLocation_ReturnsLocation()
-        {
-            var request = ExpectedRequests.WhereIsFor("Foo");
-
-            var response = await _sut.Execute(request, _logger).AsSlackResponse();
-
-            Assert.That(response.text, Is.EqualTo("Foo"));
-        }
-
-        [Test]
-        public async Task Run_KnownLocation_ReturnsLocationMap()
-        {
-            var request = ExpectedRequests.WhereIsFor("Foo");
-
-            var response = await _sut.Execute(request, _logger).AsSlackResponse();
-
-            Assert.That(response.attachments[0].image_url, Is.EqualTo("https://localhost/api/Map?code=key123&key=foo"));
-        }
-
-        [Test]
-        public async Task Run_KnownLocation_LocationMapHasCaption()
-        {
-            var request = ExpectedRequests.WhereIsFor("Foo");
-
-            var response = await _sut.Execute(request, _logger).AsSlackResponse();
-
-            Assert.That(response.attachments[0].text, Is.EqualTo("Foo is marked on the map."));
-        }
-
-        [Test]
-        public async Task Run_MisspeltLocation_ReturnsLocation()
-        {
-            var request = ExpectedRequests.WhereIsFor("Fop");
-
-            var response = await _sut.Execute(request, _logger).AsSlackResponse();
-
-            Assert.That(response.text, Is.EqualTo("Foo"));
-        }
-
-        [Test]
-        public void Run_ErrorIsThrown_LogsAndRethrows()
-        {
-            Assert.ThrowsAsync<NullReferenceException>(async () => await _sut.Execute(null, _logger));
-
-            Assert.That(_logger.Entries.Count, Is.EqualTo(1));
-        }
-
-        */
