@@ -1,4 +1,4 @@
-class Coord {
+export class Coord {
     public X: number;
     public Y: number;
 

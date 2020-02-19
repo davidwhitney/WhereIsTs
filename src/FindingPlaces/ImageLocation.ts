@@ -1,4 +1,6 @@
-class ImageLocation extends Coord {
+import { Coord } from "./Coord";
+
+export class ImageLocation extends Coord {
     public Map: string;
 
     constructor(x: number, y: number, map: string = "map") {
