@@ -1,16 +1,17 @@
-export class Hotness { // This gun be fun. ok so we need a colour thing here.
+export class Hotness {
+    _values = {};
+    
     public constructor() {
-        this[17] = "Rgba32.LightGreen";
-        this[34] = "Rgba32.Green";
-        this[50] = "Rgba32.Yellow";
-        this[67] = "Rgba32.Orange";
-        this[100] = "Rgba32.Red";
+        this._values[17] = "#90EE90";
+        this._values[34] = "#008000";
+        this._values[50] = "#FFFF00";
+        this._values[67] = "#FFA500";
+        this._values[100] = "#FFFFFF";
     }
 
     public Rank(percentageUsed: number): any {
-        return -1000; // fixme
-        /*return percentageUsed >= 100
-            ? Rgba32.Red
-            : this.FirstOrDefault(x => percentageUsed <= x.Key).Value;*/
+        return percentageUsed >= 100
+            ? "#FFFFFF"
+            : Object.getOwnPropertyNames(this._values).filter(x => percentageUsed <= parseInt(x))[0];
     }
 }

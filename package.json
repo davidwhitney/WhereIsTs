@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/davidwhitney/WhereIsTs#readme",
   "dependencies": {
+    "@types/jimp": "^0.2.28",
     "@types/node": "^13.7.2",
     "express": "^4.17.1",
-    "jest-each": "^25.1.0"
+    "jest-each": "^25.1.0",
+    "jimp": "^0.9.3"
   },
   "devDependencies": {
     "@types/jest": "^25.1.2",

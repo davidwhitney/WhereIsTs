@@ -1,0 +1,376 @@
+﻿[
+  // Gracechurch Street
+
+  {
+    "Name": "Ben Jones",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 300,
+      "Y": 105
+    }
+  },
+  {
+    "Name": "David Whitney",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 220,
+      "Y": 240
+    }
+  },
+  {
+    "Name": "Bronte",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 386,
+      "Y": 105
+    }
+  },
+  {
+    "Name": "Plato",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 440,
+      "Y": 105
+    }
+  },
+  {
+    "Name": "Woolf",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 488,
+      "Y": 105
+    }
+  },
+  {
+    "Name": "Kitchen",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 590,
+      "Y": 325
+    }
+  },
+  {
+    "Name": "Open Space",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 400,
+      "Y": 575
+    }
+  },
+  {
+    "Name": "Wollstonecraft",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 450,
+      "Y": 575
+    }
+  },
+  {
+    "Name": "Plath",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 155,
+      "Y": 645
+    }
+  },
+  {
+    "Name": "Nolan",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 163,
+      "Y": 590
+    }
+  },
+  {
+    "Name": "Dante",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 365,
+      "Y": 575
+    }
+  },
+  {
+    "Name": "Baldwin",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 635,
+      "Y": 690
+    }
+  },
+  {
+    "Name": "Shakespeare",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 585,
+      "Y": 795
+    }
+  },
+  {
+    "Name": "Angelou",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 475,
+      "Y": 700
+    }
+  },
+  {
+    "Name": "Neruda",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 450,
+      "Y": 795
+    }
+  },
+  {
+    "Name": "Hemmingway",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 400,
+      "Y": 695
+    }
+  },
+  {
+    "Name": "The Ship",
+    "ImageLocation": {
+      "Map": "gracechurch-local",
+      "X": 677,
+      "Y": 696
+    }
+  },
+  {
+    "Name": "The LCC",
+    "ImageLocation": {
+      "Map": "gracechurch-local",
+      "X": 270,
+      "Y": 910
+    }
+  },
+  {
+    "Name": "Boots",
+    "ImageLocation": {
+      "Map": "gracechurch-local",
+      "X": 645,
+      "Y": 350
+    }
+  },
+  {
+    "Name": "The Hydrant",
+    "ImageLocation": {
+      "Map": "gracechurch-local",
+      "X": 145,
+      "Y": 1050
+    }
+  },
+
+  // Gracechurch-desks
+
+  {
+    "Name": "gracechurch::245-210",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 245,
+      "Y": 210
+    },
+    "Capacity": 6 
+  },
+  {
+    "Name": "gracechurch::300-210",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 300,
+      "Y": 210
+    },
+    "Capacity": 6 
+  },
+  {
+    "Name": "gracechurch::366-210",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 366,
+      "Y": 210
+    },
+    "Capacity": 3
+  },
+  {
+    "Name": "gracechurch::420-210",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 420,
+      "Y": 210
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::480-210",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 480,
+      "Y": 210
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::560-110",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 560,
+      "Y": 110
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::600-110",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 600,
+      "Y": 110
+    },
+    "Capacity": 2
+  },
+  {
+    "Name": "gracechurch::650-110",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 650,
+      "Y": 110
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::710-110",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 710,
+      "Y": 110
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::295-290",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 295,
+      "Y": 290
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::295-350",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 295,
+      "Y": 350
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::295-405",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 295,
+      "Y": 405
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::295-470",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 295,
+      "Y": 470
+    },
+    "Capacity": 8
+  },
+  {
+    "Name": "gracechurch::270-520",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 270,
+      "Y": 520
+    },
+    "Capacity": 3
+  },
+  {
+    "Name": "gracechurch::270-570",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 270,
+      "Y": 570
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::270-630",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 270,
+      "Y": 630
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::270-695",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 270,
+      "Y": 695
+    },
+    "Capacity": 6
+  },
+  {
+    "Name": "gracechurch::200-370",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 200,
+      "Y": 370
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::180-460",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 180,
+      "Y": 460
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::170-530",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 170,
+      "Y": 530
+    },
+    "Capacity": 3
+  },
+  {
+    "Name": "gracechurch::370-310",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 370,
+      "Y": 310
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::425-310",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 425,
+      "Y": 310
+    },
+    "Capacity": 4
+  },
+  {
+    "Name": "gracechurch::490-310",
+    "ImageLocation": {
+      "Map": "gracechurch",
+      "X": 490,
+      "Y": 310
+    },
+    "Capacity": 4
+  },
+
+  // BAM
+]
