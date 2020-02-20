@@ -25,7 +25,7 @@ export class MapCommand {
                 return { status: 404 };
             }
 
-            var outputBytes = this._cache.GetOrCreate(location.Key(), entry => this._generator.GetImageFor(location.ImageLocation));
+            var outputBytes = await this._cache.GetOrCreate(location.Key(), async (entry) => await this._generator.GetImageFor(location.ImageLocation));
             return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
 
         } catch (ex) {

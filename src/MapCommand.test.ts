@@ -56,7 +56,7 @@ describe("MapCommand tests", () => {
     });
 
     it("Execute_ForKnownKey_ReturnsJpegFileFromImageGenerator", async () => {
-        _fakeGenerator.GetImageFor = () => Buffer.from([1, 2, 3, 4]);
+        _fakeGenerator.GetImageFor = async () => Buffer.from([1, 2, 3, 4]);
         var request = ExpectedRequests.MapRequestForKey(_knownLocations[0].Key());
 
         var response = await _sut.execute(request);
@@ -67,7 +67,7 @@ describe("MapCommand tests", () => {
       it("Execute_ItemsAddedToCache", async () => {
         var request = ExpectedRequests.MapRequestForKey(_knownLocations[0].Key());
 
-        var response = await _sut.execute(request);
+        await _sut.execute(request);
 
         expect(_cache.Count()).toBe(1);
     });
