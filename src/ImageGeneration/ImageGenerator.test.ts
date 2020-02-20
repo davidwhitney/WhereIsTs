@@ -29,7 +29,7 @@ describe("ImageGenerator", () => {
         var response = await _sut.GetImageFor(location);
         fs.writeFileSync('./test_results/GetImageFor_ForKnownKey_ReturnsModifiedImage.png', Buffer.from(response));
         expect(defaultMap).not.toStrictEqual(response);
-    }, 10 * 1000);
+    }, 15 * 1000);
 
     it("GetImageFor_ForKnownKeyPlaces_MarkerCoveringLocationOnMapInRed", async () => {
         const tempPath = './test_results/GetImageFor_ForKnownKeyPlaces_MarkerCoveringLocationOnMapInRed_temp.png';
@@ -46,7 +46,7 @@ describe("ImageGenerator", () => {
         expect(argb.b).toBe(0);
         expect(argb.g).toBe(0);
         expect(argb.r).toBe(255);
-    }, 10 * 1000);
+    }, 15 * 1000);
 
     it("GetImageFor_ForKnownKeyPlaces_MarkerCoveringLocationOnMapInRedIsBiggerThanOnePixel", async () => {
         const tempPath = './test_results/GetImageFor_ForKnownKeyPlaces_MarkerCoveringLocationOnMapInRedIsBiggerThanOnePixel_temp.png';
@@ -63,6 +63,6 @@ describe("ImageGenerator", () => {
         expect(argb.b).toBe(0);
         expect(argb.g).toBe(0);
         expect(argb.r).toBe(255);
-    }, 10 * 1000);
+    }, 15 * 1000);
 
 });

@@ -14,7 +14,7 @@ export class ImageGenerator implements IImageGenerator {
 
     public async GetImageFor(location: ImageLocation): Promise<Buffer> {
         return this.HighlightMap(location.Map, [
-            { Location: location, Colour: "Rgba32.Red"}
+            { Location: location, Colour: "#FF0000"}
         ]);
     }    
     
@@ -28,7 +28,7 @@ export class ImageGenerator implements IImageGenerator {
         const image = await Jimp.read(path);                
 
         highlights.forEach((loc) => {
-            const mask = new Jimp(40, 40, "#FF0000");
+            const mask = new Jimp(40, 40, loc.Colour);
             image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
         });
         

@@ -25,7 +25,7 @@ export class HeatMapCommand {
             var pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
             
             var hotness = new Hotness();
-            var highlights = new Array<Highlight>();
+            var highlights: Highlight[] = [];
 
             pointsOfInterest.forEach((poi) => {
                 var location = this._locations.filter(x=>x.Key == poi.Key)[0];

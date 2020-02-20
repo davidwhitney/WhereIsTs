@@ -10,7 +10,6 @@ import { UrlHelper } from './Infrastructure/UrlHelper';
 
 describe("Capacity command", () => {
     let _sut: CapacityCommand;
-    let _logger = {};
     let _capacityService: ICapacityService;
     let _knownLocations: LocationCollection;
 
@@ -41,7 +40,7 @@ describe("Capacity command", () => {
     it("returns a friendly error when no location requested", async () => {
         const request = ExpectedRequests.CapacityFor(" ");
 
-        const response = await _sut.execute(request, _logger);
+        const response = await _sut.execute(request);
 
         expect(response.text).toBe("Sorry! You need to specify a location.");
     });
@@ -53,7 +52,7 @@ describe("Capacity command", () => {
         _knownLocations.slice(-1)[0].Capacity = capacity;
         _capacityService.NumberOfDesksOccupiedForLocation = () => used;
         
-        var response = await _sut.execute(request, _logger);
+        var response = await _sut.execute(request);
 
         expect(response.text).toEqual(`There are ${used} of ${capacity} desks used in gracechurch.`);
         expect(response.attachments[0].image_url).toBeDefined();
@@ -62,16 +61,9 @@ describe("Capacity command", () => {
     it("Run_KnownLocationRequested_IncludesAHeatMapImage", async () => {
         var request = ExpectedRequests.CapacityFor("gracechurch");
             
-        var response = await _sut.execute(request, _logger);
+        var response = await _sut.execute(request);
 
         expect(response.attachments[0].image_url).toBeDefined();
         expect(response.attachments[0].image_url).toContain("HeatMap");
-    });
-
-    it.skip("Execute_ErrorIsThrown_LogsAndRethrows", async () => {
-        // Throw tests in jest are the worst, come back and fix this.
-        expect(() => {
-            _sut.execute(null, _logger);
-        }).rejects.toThrow();
     });
 });

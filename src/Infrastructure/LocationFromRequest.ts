@@ -1,7 +1,7 @@
 export class LocationFromRequest {
     public Value: string;
 
-    constructor(location: string) {
+    constructor(location: string | null) {
         location = location;
         if (!location) {
             location = "";

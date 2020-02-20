@@ -11,11 +11,11 @@ export class CheckInCommand {
 
     // [FunctionName("CheckIn")]
     // Functions SDK method sig garbage goes here
-    async execute(req, log) {    
+    async execute(req) {    
         try
         {
             const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
-            var rawLocation = request.location || null;
+            var rawLocation = (<string>request.location) || null;
             var location = new LocationFromRequest(rawLocation);            
             if (!location.IsValid()) {
                 return { status: 400 };

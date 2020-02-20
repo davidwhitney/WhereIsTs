@@ -19,7 +19,7 @@ export class CapacityCommand {
     }
 
     // Functions SDK method sig garbage goes here
-    async execute(req, log) {
+    async execute(req) {
         try {
 
             const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;            
@@ -35,7 +35,6 @@ export class CapacityCommand {
             var result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
             var imageUrl = this._urlHelper.CapacityImageFor(location.Value);
             return new SlackResponse(result, imageUrl);
-
         }
         catch (ex) {
             console.log(ex);
