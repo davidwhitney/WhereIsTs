@@ -1,6 +1,4 @@
 ﻿[
-  // Gracechurch Street
-
   {
     "Name": "Ben Jones",
     "ImageLocation": {
@@ -162,7 +160,6 @@
     }
   },
 
-  // Gracechurch-desks
 
   {
     "Name": "gracechurch::245-210",
@@ -370,7 +367,6 @@
       "Y": 310
     },
     "Capacity": 4
-  },
+  }
 
-  // BAM
 ]

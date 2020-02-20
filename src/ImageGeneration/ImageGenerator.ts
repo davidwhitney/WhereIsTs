@@ -35,8 +35,4 @@ export class ImageGenerator implements IImageGenerator {
         image.quality(70);
         return await image.getBufferAsync(Jimp.MIME_PNG);
     }
-
-    private static DrawHighlight(loc: Highlight, rawMap: any) {
-        throw new Error("Method not implemented.");
-    }
 }
