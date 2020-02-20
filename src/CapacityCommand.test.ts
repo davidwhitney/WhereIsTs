@@ -37,7 +37,7 @@ describe("Capacity command", () => {
         _sut = new CapacityCommand(_knownLocations, urlHelper, _capacityService);
     });
 
-    it("returns a friendly error when no location requested", async () => {
+    it("Run_NoLocationRequested_ReturnsFriendlyError", async () => {
         const request = ExpectedRequests.CapacityFor(" ");
 
         const response = await _sut.execute(request);

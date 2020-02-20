@@ -1,6 +1,7 @@
 import { ICapacityService } from "./CapacityMonitoring/ICapacityService";
 import { CheckInCommand } from "./CheckInCommand";
 import { ExpectedRequests } from "./TestHelpers/Fakes/ExpectedRequests";
+import each from "jest-each";
 
 describe("CheckInCommandTests", () => {
 
@@ -16,11 +17,12 @@ describe("CheckInCommandTests", () => {
         _sut = new CheckInCommand(_capacityService);
     });
 
-    it("Run_NoLocationRequested_ReturnsBadRequest", async () => {
-        var request = ExpectedRequests.CheckInFor(" ");
-
+    each([
+        [""],
+        [" "]
+    ]).it("Run_NoLocationRequested_ReturnsBadRequest %s", async (val) => {
+        var request = ExpectedRequests.CheckInFor(val);
         var response = await _sut.execute(request);
-
         expect(response.status).toBe(400);
     });
 

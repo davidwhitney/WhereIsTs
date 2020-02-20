@@ -16,12 +16,12 @@ export class CheckInCommand {
         {
             const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
             var rawLocation = (<string>request.location) || null;
-            var location = new LocationFromRequest(rawLocation);            
+            var location = new LocationFromRequest(rawLocation); 
             if (!location.IsValid()) {
                 return { status: 400 };
             }
 
-            this._capacityService.CheckIn(location);
+            this._capacityService.CheckIn(location.Value);
             
             return { status: 200, message: "Thanks for checking in!" };
         }
