@@ -32,30 +32,19 @@ describe("HeatMapCommandTests", () => {
     });
 
     it("Execute_ForKnownKey_ReturnsJpegContentType", async () => {
-        var request = ExpectedRequests.MapRequestForKey("gracechurch");
+        const request = ExpectedRequests.MapRequestForKey("gracechurch");
 
-        var response = await _sut.execute(request);
-        
+        const response = await _sut.execute(request);
+
         expect(response.ContentType).toBe("image/jpeg");
     });
 
     it("Execute_ForKnownKey_ReturnsJpegFileFromImageGenerator", async () => {
-        _fakeGenerator.HighlightMap = () => Buffer.from([1, 2, 3, 4]);
-        var request = ExpectedRequests.MapRequestForKey("gracechurch");
+        _fakeGenerator.HighlightMap = async () => Buffer.from([1, 2, 3, 4]);
+        const request = ExpectedRequests.MapRequestForKey("gracechurch");
 
-        var response = await _sut.execute(request);
+        const response = await _sut.execute(request);
 
         expect(response.FileContents).toStrictEqual(Buffer.from([1, 2, 3, 4]));
     });
-
-    // TBC
-    /*
-        [Test]
-        public void Execute_ErrorIsThrown_LogsAndRethrows()
-        {
-            Assert.Throws<NullReferenceException>(() => _sut.Execute(null, _logger));
-
-            Assert.That(_logger.Entries.Count, Is.EqualTo(1));
-        }*/
-
 });

@@ -46,22 +46,22 @@ describe("Capacity command", () => {
     });
 
     it("Run_KnownLocationRequested_ReturnsHintAsToAvailability", async () => {
-        var request = ExpectedRequests.CapacityFor("gracechurch");
-        var capacity = 5;
-        var used = 2;
+        const request = ExpectedRequests.CapacityFor("gracechurch");
+        const capacity = 5;
+        const used = 2;
         _knownLocations.slice(-1)[0].Capacity = capacity;
         _capacityService.NumberOfDesksOccupiedForLocation = () => used;
-        
-        var response = await _sut.execute(request);
+
+        const response = await _sut.execute(request);
 
         expect(response.text).toEqual(`There are ${used} of ${capacity} desks used in gracechurch.`);
         expect(response.attachments[0].image_url).toBeDefined();
     });
 
     it("Run_KnownLocationRequested_IncludesAHeatMapImage", async () => {
-        var request = ExpectedRequests.CapacityFor("gracechurch");
-            
-        var response = await _sut.execute(request);
+        const request = ExpectedRequests.CapacityFor("gracechurch");
+
+        const response = await _sut.execute(request);
 
         expect(response.attachments[0].image_url).toBeDefined();
         expect(response.attachments[0].image_url).toContain("HeatMap");

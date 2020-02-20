@@ -15,8 +15,8 @@ export class CheckInCommand {
         try
         {
             const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
-            var rawLocation = (<string>request.location) || null;
-            var location = new LocationFromRequest(rawLocation); 
+            const rawLocation = (<string>request.location) || null;
+            const location = new LocationFromRequest(rawLocation);
             if (!location.IsValid()) {
                 return { status: 400 };
             }

@@ -17,14 +17,13 @@ export class WhereIsCommand {
     //[FunctionName("WhereIs")]
     async execute(req) {
         try {
-
-            const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;            
-            var result = this._finder.Find(request.text);
+            const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;
+            const result = this._finder.Find(request.text);
             if (result == null || result == Loc.NotFound) {
                 return SlackResponse.NotFound();
             }
 
-            var imageUrl = this._urlHelper.ImageFor(result.Key());
+            const imageUrl = this._urlHelper.ImageFor(result.Key());
             return SlackResponse.forLocation(result, imageUrl);
         } catch (ex) {
             console.log(ex);

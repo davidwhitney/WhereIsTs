@@ -21,26 +21,27 @@ export class HeatMapCommand {
     public execute(req) {
         try {            
             const keys = url.parse("http://tempuri.org/?" + req.Query, true).query.key;
-            const mapKey = (<string>keys).toLowerCase();             
-            var pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
-            
-            var hotness = new Hotness();
-            var highlights: Highlight[] = [];
+            const mapKey = (<string>keys).toLowerCase();
+            const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
+
+            const hotness = new Hotness();
+            const highlights: Highlight[] = [];
 
             pointsOfInterest.forEach((poi) => {
-                var location = this._locations.filter(x=>x.Key == poi.Key)[0];
-                var totalAvailableSeats = location.Capacity;
-                var filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(new LocationFromRequest(poi.RawKey()));
+                const location = this._locations.filter(x => x.Key == poi.Key)[0];
+                const totalAvailableSeats = location.Capacity;
+                let locationFromRequest = new LocationFromRequest(poi.RawKey());
+                let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
                 filledSeats = filledSeats > totalAvailableSeats ? totalAvailableSeats : filledSeats;
 
-                var percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
-                
-                var colorGrade = hotness.Rank(percentage);
+                const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
+
+                const colorGrade = hotness.Rank(percentage);
 
                 highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
             });
 
-            var outputBytes = this._generator.HighlightMap(mapKey, highlights);
+            const outputBytes = this._generator.HighlightMap(mapKey, highlights);
 
             return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
         }

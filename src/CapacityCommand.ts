@@ -27,13 +27,13 @@ export class CapacityCommand {
                 return SlackResponse.NoLocationProvided();
             }
 
-            var location = new LocationFromRequest(request.text);
+            const location = new LocationFromRequest(request.text);
 
-            var totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
-            var filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location);
+            const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
+            const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
 
-            var result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
-            var imageUrl = this._urlHelper.CapacityImageFor(location.Value);
+            const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
+            const imageUrl = this._urlHelper.CapacityImageFor(location.Value);
             return new SlackResponse(result, imageUrl);
         }
         catch (ex) {

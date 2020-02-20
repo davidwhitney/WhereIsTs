@@ -8,7 +8,6 @@ import { LocationFinder } from './FindingPlaces/LocationFinder';
 import { ExpectedRequests } from './TestHelpers/Fakes/ExpectedRequests';
 
 describe("WhereIsCommand tests", () => {
-
     let _sut: WhereIsCommand;
     let _knownLocations: LocationCollection;
 
@@ -34,42 +33,32 @@ describe("WhereIsCommand tests", () => {
     });
 
     it("Run_NoValidDetailsFound_ReturnsFriendlyError", async () => {
-        var request = ExpectedRequests.WhereIsFor(null);
-
-        var response = await _sut.execute(request);
-
+        const request = ExpectedRequests.WhereIsFor(null);
+        const response = await _sut.execute(request);
         expect(response.text).toBe("Sorry! We can't find that place either.");
     });
 
     it("Run_KnownLocation_ReturnsLocation", async () => {
-        var request = ExpectedRequests.WhereIsFor("Foo");
-
-        var response = await _sut.execute(request);
-
+        const request = ExpectedRequests.WhereIsFor("Foo");
+        const response = await _sut.execute(request);
         expect(response.text).toBe("Foo");
     });
 
     it("Run_KnownLocation_ReturnsLocationMap", async () => {
-        var request = ExpectedRequests.WhereIsFor("Foo");
-
-        var response = await _sut.execute(request);
-
+        const request = ExpectedRequests.WhereIsFor("Foo");
+        const response = await _sut.execute(request);
         expect(response.attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
     });
 
     it("Run_KnownLocation_LocationMapHasCaption", async () => {
-        var request = ExpectedRequests.WhereIsFor("Foo");
-
-        var response = await _sut.execute(request);
-
+        const request = ExpectedRequests.WhereIsFor("Foo");
+        const response = await _sut.execute(request);
         expect(response.attachments[0].text).toBe("Foo is marked on the map.");
     });
 
     it("Run_MisspeltLocation_ReturnsLocation", async () => {
-        var request = ExpectedRequests.WhereIsFor("Fop");
-
-        var response = await _sut.execute(request);
-
+        const request = ExpectedRequests.WhereIsFor("Fop");
+        const response = await _sut.execute(request);
         expect(response.text).toBe("Foo");
     });
 });

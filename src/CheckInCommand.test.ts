@@ -10,7 +10,7 @@ describe("CheckInCommandTests", () => {
 
     beforeEach(() => {
         _capacityService = {
-            "Called": false
+            "Called": false,
             "CheckIn": function (){ this.Called = true; }
         } as any as ICapacityService;
         
@@ -21,29 +21,29 @@ describe("CheckInCommandTests", () => {
         [""],
         [" "]
     ]).it("Run_NoLocationRequested_ReturnsBadRequest %s", async (val) => {
-        var request = ExpectedRequests.CheckInFor(val);
-        var response = await _sut.execute(request);
+        const request = ExpectedRequests.CheckInFor(val);
+        const response = await _sut.execute(request);
         expect(response.status).toBe(400);
     });
 
     it("Run_KnownLocationRequested_ReturnsHintAsToAvailability", async () => {
-        var request = ExpectedRequests.CheckInFor("gracechurch::245-210");
+        const request = ExpectedRequests.CheckInFor("gracechurch::245-210");
 
-        var response = await _sut.execute(request);
+        const response = await _sut.execute(request);
 
         expect(response.status).toBe(200);
     });
 
     it("Run_KnownLocationRequested_ThanksUserAtTheEnd", async () => {
-        var request = ExpectedRequests.CheckInFor("gracechurch::245-210");
+        const request = ExpectedRequests.CheckInFor("gracechurch::245-210");
 
-        var response = await _sut.execute(request);
+        const response = await _sut.execute(request);
 
         expect(response.message).toBe("Thanks for checking in!");
     });
 
     it("Run_KnownLocationRequested_LogsCheckinRequest", async () => {
-        var request = ExpectedRequests.CheckInFor("gracechurch::245-210");
+        const request = ExpectedRequests.CheckInFor("gracechurch::245-210");
 
         await _sut.execute(request);
 

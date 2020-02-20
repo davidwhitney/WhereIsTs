@@ -18,14 +18,18 @@ export class MapCommand {
         try {
             
             const keys = url.parse("http://tempuri.org/?" + req.Query, true).query.key;
-            const mapKey = encodeURIComponent((<string>keys).toLowerCase());            
+            const mapKey = encodeURIComponent((<string>keys).toLowerCase());
 
-            var location = this._locations.filter(x => x.Key() == mapKey)[0];                       
+            const location = this._locations.filter(x => x.Key() == mapKey)[0];
             if (location == null) {
                 return { status: 404 };
             }
 
-            var outputBytes = await this._cache.GetOrCreate(location.Key(), async (entry) => await this._generator.GetImageFor(location.ImageLocation));
+            const outputBytes = await this._cache.GetOrCreate(
+                location.Key(),
+                async (entry) => await this._generator.GetImageFor(location.ImageLocation)
+            );
+
             return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
 
         } catch (ex) {
