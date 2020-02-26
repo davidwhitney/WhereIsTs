@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
+    "gcp-build": "tsc",
     "watch": "tsc-watch  --onSuccess \"npm run whereis\"",
     "whereis": "functions-framework --target=whereisCommand",
     "map": "functions-framework --target=mapCommand",
