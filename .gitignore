@@ -103,4 +103,5 @@ typings/
 .tern-port
 
 # dist/ including this to do scm cloud build
+dist/
 test_results/
