@@ -2,10 +2,12 @@
   "name": "whereists",
   "version": "1.0.0",
   "description": "TypeScript port of Azure Functions \"/whereis\" slackbot",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc-watch  --onSuccess \"npm run whereis\"",
+    "whereis": "functions-framework --target=whereIsCommand"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "jest-cli": "^25.1.0",
     "nodemon": "^2.0.2",
     "ts-jest": "^25.2.1",
+    "tsc-watch": "^4.1.0",
     "typescript": "^3.7.5"
   }
 }

@@ -1,27 +1,19 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const Dependencies_1 = require("./Dependencies");
 const WhereIsCommand_1 = require("./WhereIsCommand");
-const LocationFinder_1 = require("./FindingPlaces/LocationFinder");
-const LocationCollection_1 = require("./FindingPlaces/LocationCollection");
-const UrlHelper_1 = require("./Infrastructure/UrlHelper");
-var fs = require('fs');
-const configuration = {
-    UrlRoot: "https://localhost/api",
-    ApiKey: "key123",
-    CapacityApiKey: "",
-    BlobCredentials: "",
-    Root: "",
-    MapPath: ""
-};
-const knownLocationsText = fs.readFileSync("./../App_Data/locations.json");
-const knownLocations = JSON.parse(knownLocationsText);
-const locations = new LocationCollection_1.LocationCollection(...knownLocations);
-const locationFinder = new LocationFinder_1.LocationFinder(locations);
-const urlHelper = new UrlHelper_1.UrlHelper(configuration);
-exports.whereIsCommand = (req, res) => {
-    let message = req.query.message || req.body.message || 'Hello World!';
-    const command = new WhereIsCommand_1.WhereIsCommand(locationFinder, urlHelper);
-    const result = command.execute(req);
+exports.whereIsCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const command = new WhereIsCommand_1.WhereIsCommand(Dependencies_1.locationFinder, Dependencies_1.urlHelper);
+    const result = yield command.execute(req);
     res.status(200).send(result);
-};
+});
 //# sourceMappingURL=index.js.map

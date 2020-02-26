@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Name": "Ben Jones",
     "ImageLocation": {
@@ -159,8 +159,6 @@
       "Y": 1050
     }
   },
-
-
   {
     "Name": "gracechurch::245-210",
     "ImageLocation": {
@@ -168,7 +166,7 @@
       "X": 245,
       "Y": 210
     },
-    "Capacity": 6 
+    "Capacity": 6
   },
   {
     "Name": "gracechurch::300-210",
@@ -177,7 +175,7 @@
       "X": 300,
       "Y": 210
     },
-    "Capacity": 6 
+    "Capacity": 6
   },
   {
     "Name": "gracechurch::366-210",
@@ -368,5 +366,4 @@
     },
     "Capacity": 4
   }
-
 ]

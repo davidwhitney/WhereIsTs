@@ -5,6 +5,14 @@ TypeScript port of Azure Functions "/whereis" slackbot
 
 Just work in TypeScript with a test runner.
 
+To run with the GCP cloud functions emulator run:
+
+```bash
+npm run watch
+```
+
+It'll watch for ts changes and start the emulator when they occur.
+
 # Deployment
 
 On the commandline, run
