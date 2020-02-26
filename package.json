@@ -2,11 +2,12 @@
   "name": "whereists",
   "version": "1.0.0",
   "description": "TypeScript port of Azure Functions \"/whereis\" slackbot",
-  "main": "dist/index.js",
-  "scripts": {
+  "main": "src/index.js",
+  "scripts": {    
+    "start": "node ./src/index.js",
     "test": "jest",
     "build": "tsc",
-    "gcp-build": "tsc",
+    "gcp-build": "tsc -p .",
     "watch": "tsc-watch  --onSuccess \"npm run whereis\"",
     "whereis": "functions-framework --target=whereisCommand",
     "map": "functions-framework --target=mapCommand",

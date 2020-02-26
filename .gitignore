@@ -103,5 +103,8 @@ typings/
 .tern-port
 
 # dist/ including this to do scm cloud build
-dist/
+src/**/*.js
+src/**/*.map
 test_results/
+/dist/*.js
+/dist/*.map
