@@ -31,4 +31,4 @@ const capacityService = new CapacityService_1.CapacityService(capacityRepository
 exports.whereis = new WhereIsCommand_1.WhereIsCommand(locationFinder, urlHelper);
 exports.map = new MapCommand_1.MapCommand(locations, imageGenerator, memoryCache);
 exports.heatmap = new HeatMapCommand_1.HeatMapCommand(locations, imageGenerator, capacityService);
-//# sourceMappingURL=Dependencies.js.map
+//# sourceMappingURL=AppFactory.js.map

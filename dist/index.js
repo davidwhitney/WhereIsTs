@@ -10,10 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Dependencies_1 = require("./Dependencies");
-const WhereIsCommand_1 = require("./WhereIsCommand");
 exports.whereIsCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const command = new WhereIsCommand_1.WhereIsCommand(Dependencies_1.locationFinder, Dependencies_1.urlHelper);
-    const result = yield command.execute(req);
-    res.status(200).send(result);
+    const result = yield Dependencies_1.whereis.execute(req);
+    res.send(result);
+});
+exports.mapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield Dependencies_1.map.execute(req);
+    res.send(result);
+});
+exports.heatMapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield Dependencies_1.heatmap.execute(req);
+    res.send(result);
 });
 //# sourceMappingURL=index.js.map
