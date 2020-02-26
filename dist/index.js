@@ -27,6 +27,10 @@ exports.mapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.send(result);
 });
 exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("In the command");
+    console.log(req.body);
+    console.log(req);
+    console.log("It's handler time!");
     const result = yield AppFactory_1.whereis.execute(req);
     res.send(result);
 });

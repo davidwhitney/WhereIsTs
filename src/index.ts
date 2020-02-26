@@ -21,6 +21,10 @@ export const mapCommand = async (req, res) => {
 };
 
 export const whereisCommand = async (req, res) => {
+  console.log("In the command");
+  console.log(req.body);
+  console.log(req);
+  console.log("It's handler time!");
   const result = await whereis.execute(req);  
   res.send(result);
 };

@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const SlackResponse_1 = require("./Slack/SlackResponse");
-const url = require("url");
 const Location_1 = require("./FindingPlaces/Location");
 class WhereIsCommand {
     constructor(finder, urlHelper) {
@@ -21,8 +20,9 @@ class WhereIsCommand {
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(req.body);
-                const request = url.parse("http://tempuri.org/?" + req.body, true).query;
+                //const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;
+                const request = req.body;
+                console.log("Request is:" + JSON.stringify(request));
                 const result = this._finder.Find(request.text);
                 if (result == null || result == Location_1.Loc.NotFound) {
                     return SlackResponse_1.SlackResponse.NotFound();
