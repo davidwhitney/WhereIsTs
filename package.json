@@ -7,7 +7,11 @@
     "test": "jest",
     "build": "tsc",
     "watch": "tsc-watch  --onSuccess \"npm run whereis\"",
-    "whereis": "functions-framework --target=whereIsCommand"
+    "whereis": "functions-framework --target=whereisCommand",
+    "map": "functions-framework --target=mapCommand",
+    "checkin": "functions-framework --target=checkinCommand",
+    "heatmap": "functions-framework --target=heatmapCommand",
+    "capacity": "functions-framework --target=capacityCommand"
   },
   "repository": {
     "type": "git",

@@ -9,6 +9,8 @@ import { InMemoryCapacityRepository } from "./CapacityMonitoring/InMemoryCapacit
 import { WhereIsCommand } from "./WhereIsCommand";
 import { MapCommand } from "./MapCommand";
 import { HeatMapCommand } from "./HeatMapCommand";
+import { CheckInCommand } from "./CheckInCommand";
+import { CapacityCommand } from "./CapacityCommand";
 
 var fs = require('fs');
 
@@ -32,6 +34,8 @@ const imageGenerator = new ImageGenerator(configuration);
 const memoryCache = new MemoryCache();
 const capacityService = new CapacityService(capacityRepository);
 
-export const whereis = new WhereIsCommand(locationFinder, urlHelper);
-export const map = new MapCommand(locations, imageGenerator, memoryCache);
+export const capacity = new CapacityCommand(locations, urlHelper, capacityService);
+export const checkin = new CheckInCommand(capacityService);
 export const heatmap = new HeatMapCommand(locations, imageGenerator, capacityService);
+export const map = new MapCommand(locations, imageGenerator, memoryCache);
+export const whereis = new WhereIsCommand(locationFinder, urlHelper);

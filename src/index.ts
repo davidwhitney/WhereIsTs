@@ -1,7 +1,17 @@
-import { whereis, map, heatmap } from "./Dependencies";
+import { capacity, checkin, heatmap, map, whereis } from "./AppFactory";
 
-export const whereIsCommand = async (req, res) => {
-  const result = await whereis.execute(req);  
+export const capacityCommand = async (req, res) => {
+  const result = await capacity.execute(req);  
+  res.send(result);
+};
+
+export const checkinCommand = async (req, res) => {
+  const result = await checkin.execute(req);  
+  res.send(result);
+};
+
+export const heatmapCommand = async (req, res) => {
+  const result = await heatmap.execute(req);  
   res.send(result);
 };
 
@@ -10,7 +20,7 @@ export const mapCommand = async (req, res) => {
   res.send(result);
 };
 
-export const heatMapCommand = async (req, res) => {
-  const result = await heatmap.execute(req);  
+export const whereisCommand = async (req, res) => {
+  const result = await whereis.execute(req);  
   res.send(result);
 };
