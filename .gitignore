@@ -106,5 +106,4 @@ typings/
 src/**/*.js
 src/**/*.map
 test_results/
-/dist/*.js
-/dist/*.map
+/dist/*.*
