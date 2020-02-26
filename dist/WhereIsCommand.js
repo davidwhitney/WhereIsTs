@@ -21,6 +21,7 @@ class WhereIsCommand {
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(req.body);
                 const request = url.parse("http://tempuri.org/?" + req.body, true).query;
                 const result = this._finder.Find(request.text);
                 if (result == null || result == Location_1.Loc.NotFound) {
