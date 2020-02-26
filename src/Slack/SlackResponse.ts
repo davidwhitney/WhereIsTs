@@ -3,7 +3,7 @@ import { Loc } from "../FindingPlaces/Location";
 
 export class SlackResponse {
     public text: string;
-    public attachments: Array<SlackAttachment> = new Array<SlackAttachment>();
+    public attachments: Array<SlackAttachment> | null = new Array<SlackAttachment>();
 
     constructor(result: string, imageUrl: string | null = null, overloadedAttachmentText: string | null = null) {
 
@@ -15,10 +15,10 @@ export class SlackResponse {
         });
     }
 
-    public static forLocation(result: Loc, imageUrl: string) {
+    public static forLocation(result: Loc, imageUrl: string): SlackResponse {
         return new SlackResponse(result.Name, imageUrl, `${result.Name} is marked on the map.`);
     }
 
-    public static NotFound() { return { text: "Sorry! We can't find that place either." }; }
+    public static NotFound(): SlackResponse { return { text: "Sorry! We can't find that place either.", attachments: null }; }
     public static NoLocationProvided(): SlackResponse { return  new SlackResponse("Sorry! You need to specify a location."); }
 }

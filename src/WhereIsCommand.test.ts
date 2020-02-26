@@ -47,13 +47,17 @@ describe("WhereIsCommand tests", () => {
     it("Run_KnownLocation_ReturnsLocationMap", async () => {
         const request = ExpectedRequests.WhereIsFor("Foo");
         const response = await _sut.execute(request);
-        expect(response.attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
+        const attachments = response.attachments || [];
+
+        expect(attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
     });
 
     it("Run_KnownLocation_LocationMapHasCaption", async () => {
         const request = ExpectedRequests.WhereIsFor("Foo");
         const response = await _sut.execute(request);
-        expect(response.attachments[0].text).toBe("Foo is marked on the map.");
+        const attachments = response.attachments || [];
+        
+        expect(attachments[0].text).toBe("Foo is marked on the map.");
     });
 
     it("Run_MisspeltLocation_ReturnsLocation", async () => {

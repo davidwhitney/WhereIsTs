@@ -53,17 +53,19 @@ describe("Capacity command", () => {
         _capacityService.NumberOfDesksOccupiedForLocation = () => used;
 
         const response = await _sut.execute(request);
+        const attachments = response.attachments || [];
 
         expect(response.text).toEqual(`There are ${used} of ${capacity} desks used in gracechurch.`);
-        expect(response.attachments[0].image_url).toBeDefined();
+        expect(attachments[0].image_url).toBeDefined();
     });
 
     it("Run_KnownLocationRequested_IncludesAHeatMapImage", async () => {
         const request = ExpectedRequests.CapacityFor("gracechurch");
 
         const response = await _sut.execute(request);
+        const attachments = response.attachments || [];
 
-        expect(response.attachments[0].image_url).toBeDefined();
-        expect(response.attachments[0].image_url).toContain("HeatMap");
+        expect(attachments[0].image_url).toBeDefined();
+        expect(attachments[0].image_url).toContain("HeatMap");
     });
 });

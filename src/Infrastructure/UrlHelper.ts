@@ -1,4 +1,5 @@
 import { Configuration } from "./Configuration";
+import { IUrlHelper } from "./IUrlHelper";
 
 export class UrlHelper implements IUrlHelper {
     private _config: Configuration;

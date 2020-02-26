@@ -4,7 +4,8 @@
   "description": "TypeScript port of Azure Functions \"/whereis\" slackbot",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
