@@ -24,20 +24,16 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
         else if (slackRequest.command === "/capacity") {
             result = yield AppFactory_1.capacity.execute(slackRequest);
         }
+        else if (req.path.indexOf("/check-in") !== -1) {
+            result = yield AppFactory_1.checkin.execute(req);
+        }
         else if (req.path.indexOf("/map") !== -1) {
             const mapResult = yield AppFactory_1.map.execute(req);
-            res.setHeader('Content-Type', mapResult.ContentType);
-            res.send(mapResult.FileContents);
-            return;
+            return imageFile(res, mapResult);
         }
         else if (req.path.indexOf("/heatmap") !== -1) {
             const mapResult = yield AppFactory_1.heatmap.execute(req);
-            res.setHeader('Content-Type', mapResult.ContentType);
-            res.send(mapResult.FileContents);
-            return;
-        }
-        else if (req.path.indexOf("/check-in") !== -1) {
-            result = yield AppFactory_1.checkin.execute(req);
+            return imageFile(res, mapResult);
         }
         console.log(result);
         res.send(result);
@@ -47,4 +43,8 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send(ex);
     }
 });
+const imageFile = (res, fileResult) => {
+    res.setHeader('Content-Type', fileResult.ContentType);
+    res.send(fileResult.FileContents);
+};
 //# sourceMappingURL=index.js.map

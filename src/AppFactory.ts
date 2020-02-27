@@ -35,6 +35,7 @@ const imageGenerator = new ImageGenerator(configuration);
 const memoryCache = new MemoryCache();
 const capacityService = new CapacityService(capacityRepository);
 
+export type FileResult = { status: number, FileContents: Buffer, ContentType: string }
 export const capacity = new CapacityCommand(locations, urlHelper, capacityService);
 export const checkin = new CheckInCommand(capacityService);
 export const heatmap = new HeatMapCommand(locations, imageGenerator, capacityService);

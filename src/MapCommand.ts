@@ -1,7 +1,6 @@
 import { LocationCollection } from "./FindingPlaces/LocationCollection";
 import { IImageGenerator } from "./ImageGeneration/IImageGenerator";
 import { IMemoryCache } from "./Infrastructure/IMemoryCache";
-import url = require("url");
 
 export class MapCommand {
     private readonly _locations: LocationCollection;
