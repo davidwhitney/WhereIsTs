@@ -24,7 +24,7 @@ class ImageGenerator {
     HighlightMap(map, highlights) {
         var map;
         return __awaiter(this, void 0, void 0, function* () {
-            map = this._config.MapPath + "/" + `${map}.png`;
+            map = this._config.MapPath + "/" + `${map}.jpg`;
             return yield ImageGenerator.HighlightAreaInImage(map, highlights);
         });
     }
