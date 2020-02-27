@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript port of Azure Functions \"/whereis\" slackbot",
   "main": "dist/index.js",
-  "scripts": {    
+  "scripts": {
     "start": "node ./dist/index.js",
     "test": "jest",
     "build": "tsc",
@@ -14,6 +14,9 @@
     "heatmap": "functions-framework --target=heatmapCommand",
     "capacity": "functions-framework --target=capacityCommand"
   },
+  "pre-commit": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidwhitney/WhereIsTs.git"
@@ -45,6 +48,7 @@
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
     "ts-jest": "^25.2.1",
     "tsc-watch": "^4.1.0",
     "typescript": "^3.7.5"
