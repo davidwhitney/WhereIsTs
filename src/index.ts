@@ -29,5 +29,6 @@ export const whereisCommand = async (req, res) => {
     result = await capacity.execute(slackRequest);
   }
   
+  console.log(result);
   res.send(result);
 };

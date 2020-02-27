@@ -26,7 +26,6 @@ const capacityRepository = new InMemoryCapacityRepository_1.InMemoryCapacityRepo
 const locationsjson = fs.readFileSync("./App_Data/locations.json", { encoding: "utf8" });
 const knownLocations = JSON.parse(locationsjson);
 const asLocs = knownLocations.map(ld => new Location_1.Loc(ld.Name, ld.ImageLocation, ld.Capacity));
-console.log(asLocs);
 const locations = new LocationCollection_1.LocationCollection(...asLocs);
 const locationFinder = new LocationFinder_1.LocationFinder(locations);
 const urlHelper = new UrlHelper_1.UrlHelper(configuration);

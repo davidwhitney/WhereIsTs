@@ -31,6 +31,7 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
     if (slackRequest.command === "/capacity") {
         result = yield AppFactory_1.capacity.execute(slackRequest);
     }
+    console.log(result);
     res.send(result);
 });
 //# sourceMappingURL=index.js.map
