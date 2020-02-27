@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Jimp = require('jimp');
+const Jimp = require("jimp");
 class ImageGenerator {
     constructor(config) {
         this._config = config;
@@ -35,8 +35,8 @@ class ImageGenerator {
                 const mask = new Jimp(40, 40, loc.Colour);
                 image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
             });
-            image.quality(30);
-            return yield image.getBufferAsync(Jimp.MIME_PNG);
+            const compressed = yield image.quality(30);
+            return yield compressed.getBufferAsync(Jimp.MIME_PNG);
         });
     }
 }

@@ -2,7 +2,7 @@ import { IImageGenerator } from './IImageGenerator';
 import { ImageLocation } from '../FindingPlaces/ImageLocation';
 import { Highlight } from './Highlight';
 import { Configuration } from '../Infrastructure/Configuration';
-const Jimp = require('jimp');
+import Jimp = require('jimp');
 
 export class ImageGenerator implements IImageGenerator {
 
@@ -32,7 +32,7 @@ export class ImageGenerator implements IImageGenerator {
             image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
         });
         
-        image.quality(30);
-        return await image.getBufferAsync(Jimp.MIME_PNG);
+        const compressed = await image.quality(30);
+        return await compressed.getBufferAsync(Jimp.MIME_PNG);
     }
 }
