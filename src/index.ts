@@ -21,7 +21,7 @@ export const whereisCommand = async (req, res) => {
         const mapResult = await map.execute(req); 
         res.status(mapResult.status);
         res.setHeader('Content-Type', mapResult.ContentType);
-        res.send(...mapResult.FileContents);
+        res.send(mapResult.FileContents);
         return;        
       } else if(req.path.indexOf("/HeatMap") !== -1) {
         result = await heatmap.execute(req); 
