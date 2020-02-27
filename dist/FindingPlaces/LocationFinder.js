@@ -13,7 +13,7 @@ class LocationFinder {
             return Location_1.Loc.NotFound;
         }
         var key = encodeURIComponent(location.toLowerCase());
-        var exactMatch = this._locations.filter(x => x.Key() == key)[0];
+        var exactMatch = this._locations.filter(x => this.KeyFor(x) == key)[0];
         if (exactMatch != null) {
             return exactMatch;
         }
@@ -26,14 +26,15 @@ class LocationFinder {
     }
     ReturnNearestSpellingMatch(key) {
         var distances = this._locations.map(x => ({
-            key: x.Key(),
-            distance: LevenshteinDistance_1.LevenshteinDistance.Compute(x.Key(), key)
+            key: this.KeyFor(x),
+            distance: LevenshteinDistance_1.LevenshteinDistance.Compute(this.KeyFor(x), key)
         })).sort((a, b) => a.distance - b.distance);
         return {
-            nearest: this._locations.filter(x => x.Key() == distances[0].key)[0],
+            nearest: this._locations.filter(x => this.KeyFor(x) == distances[0].key)[0],
             distance: distances[0].distance
         };
     }
+    KeyFor(x) { return encodeURIComponent(x.Name.toLowerCase()); }
 }
 exports.LocationFinder = LocationFinder;
 //# sourceMappingURL=LocationFinder.js.map

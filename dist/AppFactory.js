@@ -12,6 +12,7 @@ const MapCommand_1 = require("./MapCommand");
 const HeatMapCommand_1 = require("./HeatMapCommand");
 const CheckInCommand_1 = require("./CheckInCommand");
 const CapacityCommand_1 = require("./CapacityCommand");
+const Location_1 = require("./FindingPlaces/Location");
 var fs = require('fs');
 const configuration = {
     UrlRoot: "https://localhost/api",
@@ -24,7 +25,9 @@ const configuration = {
 const capacityRepository = new InMemoryCapacityRepository_1.InMemoryCapacityRepository();
 const locationsjson = fs.readFileSync("./App_Data/locations.json", { encoding: "utf8" });
 const knownLocations = JSON.parse(locationsjson);
-const locations = new LocationCollection_1.LocationCollection(...knownLocations);
+const asLocs = knownLocations.map(ld => new Location_1.Loc(ld.Name, ld.ImageLocation, ld.Capacity));
+console.log(asLocs);
+const locations = new LocationCollection_1.LocationCollection(...asLocs);
 const locationFinder = new LocationFinder_1.LocationFinder(locations);
 const urlHelper = new UrlHelper_1.UrlHelper(configuration);
 const imageGenerator = new ImageGenerator_1.ImageGenerator(configuration);

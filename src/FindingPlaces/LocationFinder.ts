@@ -20,7 +20,7 @@ export class LocationFinder implements ILocationFinder {
         }
 
         var key = encodeURIComponent(location.toLowerCase());
-        var exactMatch = this._locations.filter(x => x.Key() == key)[0];
+        var exactMatch = this._locations.filter(x => this.KeyFor(x) == key)[0];
         if (exactMatch != null) {
             return exactMatch;  
         }
@@ -37,13 +37,15 @@ export class LocationFinder implements ILocationFinder {
 
     private ReturnNearestSpellingMatch(key: string): { nearest: Loc, distance: number } {
         var distances: Array<DistanceMap> = this._locations.map(x => ({
-            key: x.Key(),
-            distance: LevenshteinDistance.Compute(x.Key(), key)
+            key: this.KeyFor(x),
+            distance: LevenshteinDistance.Compute(this.KeyFor(x), key)
         })).sort((a, b) => a.distance - b.distance);
 
         return {
-            nearest: this._locations.filter(x => x.Key() == distances[0].key)[0],
+            nearest: this._locations.filter(x => this.KeyFor(x) == distances[0].key)[0],
             distance: distances[0].distance
         }
-    } 
+    }
+    
+    private KeyFor(x: Loc) { return encodeURIComponent(x.Name.toLowerCase()); }
 }
