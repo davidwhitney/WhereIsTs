@@ -70,15 +70,12 @@ describe("Capacity command", () => {
 });
 
 describe("Acceptance test", () => {
-
-    it("Somethings", async () => {
+    it("With real data, returns correct total capacity", async () => {
         const dep = require("./AppFactory");
-        
-        const result = await dep.capacity.execute({
-            text: "gracechurch"
-        });
 
-        expect(result.text).toBe("abc");
+        const result = await dep.capacity.execute({ text: "gracechurch" });
+
+        expect(result.text).toBe("There are 0 of 107 desks used in gracechurch.");
     });
 
 });
