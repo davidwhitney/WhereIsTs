@@ -18,9 +18,8 @@ export const whereisCommand = async (req, res) => {
       } else if(slackRequest.command === "/capacity") {    
         result = await capacity.execute(slackRequest);
       } else if(req.path.indexOf("/Map") !== -1) {
-        const mapResult = await map.execute(req); 
-        res.status(mapResult.status);
-        res.setHeader('Content-Type', mapResult.ContentType);
+        const mapResult = await map.execute(req);        
+        // res.setHeader('Content-Type', mapResult.ContentType);
         res.send(mapResult.FileContents);
         return;        
       } else if(req.path.indexOf("/HeatMap") !== -1) {

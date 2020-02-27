@@ -26,8 +26,7 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
         else if (req.path.indexOf("/Map") !== -1) {
             const mapResult = yield AppFactory_1.map.execute(req);
-            res.status(mapResult.status);
-            res.setHeader('Content-Type', mapResult.ContentType);
+            // res.setHeader('Content-Type', mapResult.ContentType);
             res.send(mapResult.FileContents);
             return;
         }
