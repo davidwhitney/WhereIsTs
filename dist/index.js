@@ -31,7 +31,10 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
             return;
         }
         else if (req.path.indexOf("/heatmap") !== -1) {
-            result = yield AppFactory_1.heatmap.execute(req);
+            const mapResult = yield AppFactory_1.heatmap.execute(req);
+            res.setHeader('Content-Type', mapResult.ContentType);
+            res.send(mapResult.FileContents);
+            return;
         }
         else if (req.path.indexOf("/check-in") !== -1) {
             result = yield AppFactory_1.checkin.execute(req);

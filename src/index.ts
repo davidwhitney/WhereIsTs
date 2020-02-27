@@ -15,17 +15,25 @@ export const whereisCommand = async (req, res) => {
 
       if (slackRequest.command === "/whereis") {    
         result = await whereis.execute(slackRequest);
+
       } else if(slackRequest.command === "/capacity") {    
         result = await capacity.execute(slackRequest);
+
       } else if(req.path.indexOf("/map") !== -1) {
         const mapResult = await map.execute(req);
         res.setHeader('Content-Type', mapResult.ContentType);
         res.send(mapResult.FileContents);
         return;        
+
       } else if(req.path.indexOf("/heatmap") !== -1) {
-        result = await heatmap.execute(req); 
+        const mapResult = await heatmap.execute(req); 
+        res.setHeader('Content-Type', mapResult.ContentType);
+        res.send(mapResult.FileContents);
+        return;
+
       } else if(req.path.indexOf("/check-in") !== -1) {
         result = await checkin.execute(req);
+
       }
 
       console.log(result);
