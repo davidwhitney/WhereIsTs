@@ -24,7 +24,7 @@ class ImageGenerator {
     HighlightMap(map, highlights) {
         var map;
         return __awaiter(this, void 0, void 0, function* () {
-            map = this._config.MapPath + "/" + `${map}.png`;
+            map = this._config.MapPath + "/" + `${map}.jpg`;
             return yield ImageGenerator.HighlightAreaInImage(map, highlights);
         });
     }
@@ -36,7 +36,7 @@ class ImageGenerator {
                 image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
             });
             const compressed = yield image.quality(30);
-            return yield compressed.getBufferAsync(Jimp.MIME_PNG);
+            return yield compressed.getBufferAsync(Jimp.MIME_JPEG);
         });
     }
 }
