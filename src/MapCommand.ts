@@ -14,10 +14,12 @@ export class MapCommand {
         this._cache = cache;
     }
 
-    async execute(req) {        
-        const mapKey = encodeURIComponent(req.query.key.toLowerCase());
+    async execute(req) {   
 
-        const location = this._locations.filter(x => x.Key() == mapKey)[0];
+        const key = req.query.key || ""; 
+        const mapKey = encodeURIComponent(key.toLowerCase());
+
+        const location = this._locations.GetByKey(mapKey);
         if (location == null) {
             return { status: 404 };
         }

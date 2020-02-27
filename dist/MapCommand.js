@@ -17,8 +17,9 @@ class MapCommand {
     }
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
-            const mapKey = encodeURIComponent(req.query.key.toLowerCase());
-            const location = this._locations.filter(x => x.Key() == mapKey)[0];
+            const key = req.query.key || "";
+            const mapKey = encodeURIComponent(key.toLowerCase());
+            const location = this._locations.GetByKey(mapKey);
             if (location == null) {
                 return { status: 404 };
             }

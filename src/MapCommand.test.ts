@@ -45,7 +45,7 @@ describe("MapCommand tests", () => {
 
     each([
         ["foo"],
-        ["foo+bar"]
+        ["Foo Bar"]
       ]).test("Execute_ForKnownKey_ReturnsJpegContentType %s", async (key) => {
         const request = ExpectedRequests.MapRequestForKey(key);
 
