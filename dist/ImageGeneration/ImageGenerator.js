@@ -30,11 +30,11 @@ class ImageGenerator {
     }
     static HighlightAreaInImage(path, highlights) {
         return __awaiter(this, void 0, void 0, function* () {
-            const image = yield Jimp.read(path);
-            highlights.forEach((loc) => {
+            let image = yield Jimp.read(path);
+            highlights.forEach((loc) => __awaiter(this, void 0, void 0, function* () {
                 const mask = new Jimp(40, 40, loc.Colour);
-                image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
-            });
+                image = yield image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
+            }));
             const compressed = yield image.quality(30);
             return yield compressed.getBufferAsync(Jimp.MIME_JPEG);
         });

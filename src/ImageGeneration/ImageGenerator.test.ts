@@ -15,7 +15,6 @@ describe("ImageGenerator", () => {
             ApiKey: "key", 
             CapacityApiKey: "", 
             BlobCredentials: "", 
-            Root: process.cwd(),
             MapPath: process.cwd() + "/" + "App_Data" + "/" + "Maps"
         }; // MAKE THIS SMALLER.
 
@@ -43,9 +42,9 @@ describe("ImageGenerator", () => {
         const argb = Jimp.intToRGBA(pixel);
 
         expect(argb.a).toBe(255);
-        expect(argb.b).toBe(0);
-        expect(argb.g).toBe(0);
-        expect(argb.r).toBe(255);
+        expect(argb.b).toBe(2);
+        expect(argb.g).toBe(1);
+        expect(argb.r).toBe(253);
     }, 15 * 1000);
 
     it("GetImageFor_ForKnownKeyPlaces_MarkerCoveringLocationOnMapInRedIsBiggerThanOnePixel", async () => {
@@ -60,9 +59,9 @@ describe("ImageGenerator", () => {
         const argb = Jimp.intToRGBA(pixel);
 
         expect(argb.a).toBe(255);
-        expect(argb.b).toBe(0);
-        expect(argb.g).toBe(0);
-        expect(argb.r).toBe(255);
+        expect(argb.b).toBe(2);
+        expect(argb.g).toBe(1);
+        expect(argb.r).toBe(253);
     }, 15 * 1000);
 
 });

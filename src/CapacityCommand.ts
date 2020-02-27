@@ -18,7 +18,6 @@ export class CapacityCommand {
         this._capacityService = capacityService;
     }
 
-    // Functions SDK method sig garbage goes here
     async execute(request: SlackRequest) {
         if (request.text.trim() === "") {
             return SlackResponse.NoLocationProvided();
@@ -26,8 +25,12 @@ export class CapacityCommand {
 
         const location = new LocationFromRequest(request.text);
 
+        console.log("Detected location is :" + location.Value);
+        
         const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
         const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
+
+        console.log("Capacity of " + totalAvailableSeats);
 
         const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
         const imageUrl = this._urlHelper.CapacityImageFor(location.Value);

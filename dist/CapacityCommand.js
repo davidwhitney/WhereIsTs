@@ -17,15 +17,16 @@ class CapacityCommand {
         this._urlHelper = urlHelper;
         this._capacityService = capacityService;
     }
-    // Functions SDK method sig garbage goes here
     execute(request) {
         return __awaiter(this, void 0, void 0, function* () {
             if (request.text.trim() === "") {
                 return SlackResponse_1.SlackResponse.NoLocationProvided();
             }
             const location = new LocationFromRequest_1.LocationFromRequest(request.text);
+            console.log("Detected location is :" + location.Value);
             const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
             const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
+            console.log("Capacity of " + totalAvailableSeats);
             const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
             const imageUrl = this._urlHelper.CapacityImageFor(location.Value);
             return new SlackResponse_1.SlackResponse(result, imageUrl);

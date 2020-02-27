@@ -21,10 +21,10 @@ class MapCommand {
             const mapKey = encodeURIComponent(key.toLowerCase());
             const location = this._locations.GetByKey(mapKey);
             if (location == null) {
-                return { status: 404, FileContents: [], ContentType: "image/jpg" };
+                return { status: 404, FileContents: [], ContentType: "image/jpeg" };
             }
             const outputBytes = yield this._cache.GetOrCreate(location.Key(), (entry) => __awaiter(this, void 0, void 0, function* () { return yield this._generator.GetImageFor(location.ImageLocation); }));
-            return { status: 200, FileContents: outputBytes, ContentType: "image/jpg" };
+            return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
         });
     }
 }

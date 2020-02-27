@@ -25,11 +25,11 @@ export class ImageGenerator implements IImageGenerator {
 
     private static async HighlightAreaInImage(path: string, highlights: Highlight[]): Promise<Buffer> {
 
-        const image = await Jimp.read(path);                
+        let image = await Jimp.read(path);                
 
-        highlights.forEach((loc) => {
+        highlights.forEach(async (loc) => {
             const mask = new Jimp(40, 40, loc.Colour);
-            image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
+            image = await image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
         });
         
         const compressed = await image.quality(30);

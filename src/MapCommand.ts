@@ -21,7 +21,7 @@ export class MapCommand {
 
         const location = this._locations.GetByKey(mapKey);
         if (location == null) {
-            return { status: 404, FileContents: [], ContentType: "image/jpg" };
+            return { status: 404, FileContents: [], ContentType: "image/jpeg" };
         }
 
         const outputBytes = await this._cache.GetOrCreate(
@@ -29,6 +29,6 @@ export class MapCommand {
             async (entry) => await this._generator.GetImageFor(location.ImageLocation)
         );
 
-        return { status: 200, FileContents: outputBytes, ContentType: "image/jpg" };
+        return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
     }
 }
