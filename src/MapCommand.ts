@@ -29,6 +29,6 @@ export class MapCommand {
             async (entry) => await this._generator.GetImageFor(location.ImageLocation)
         );
 
-        return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
+        return { status: 200, FileContents: outputBytes, ContentType: "image/png" };
     }
 }

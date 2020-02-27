@@ -19,7 +19,6 @@ export const whereisCommand = async (req, res) => {
         result = await capacity.execute(slackRequest);
       } else if(req.path.indexOf("/map") !== -1) {
         const mapResult = await map.execute(req);
-        res.status(mapResult.status);
         res.setHeader('Content-Type', mapResult.ContentType);
         res.send(mapResult.FileContents);
         return;        

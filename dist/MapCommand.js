@@ -24,7 +24,7 @@ class MapCommand {
                 return { status: 404 };
             }
             const outputBytes = yield this._cache.GetOrCreate(location.Key(), (entry) => __awaiter(this, void 0, void 0, function* () { return yield this._generator.GetImageFor(location.ImageLocation); }));
-            return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
+            return { status: 200, FileContents: outputBytes, ContentType: "image/png" };
         });
     }
 }

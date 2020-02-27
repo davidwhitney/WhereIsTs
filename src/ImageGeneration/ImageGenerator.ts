@@ -19,7 +19,7 @@ export class ImageGenerator implements IImageGenerator {
     }    
     
     public async HighlightMap(map: string, highlights: Highlight[]): Promise<Buffer> {
-        var map = this._config.MapPath + "/" + `${map}.jpg`;
+        var map = this._config.MapPath + "/" + `${map}.png`;
         return await ImageGenerator.HighlightAreaInImage(map, highlights);
     }
 
@@ -32,7 +32,7 @@ export class ImageGenerator implements IImageGenerator {
             image.composite(mask, loc.Location.X - 20, loc.Location.Y - 20);
         });
         
-        image.quality(70);
+        image.quality(30);
         return await image.getBufferAsync(Jimp.MIME_PNG);
     }
 }
