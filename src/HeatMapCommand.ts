@@ -21,7 +21,8 @@ export class HeatMapCommand {
 
         const mapKey = encodeURIComponent(req.query.key.toLowerCase());
         const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
-
+        
+        console.log("Found " + pointsOfInterest.length + " pois for " + mapKey);
         const hotness = new Hotness();
         const highlights: Highlight[] = [];
 
