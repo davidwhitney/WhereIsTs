@@ -1,9 +1,6 @@
 import { capacity, checkin, heatmap, map, whereis } from "./AppFactory";
-
-export const capacityCommand = async (req, res) => {
-  const result = await capacity.execute(req);  
-  res.send(result);
-};
+import { SlackRequest } from './Slack/SlackRequest';
+import { SlackResponse } from './Slack/SlackResponse';
 
 export const checkinCommand = async (req, res) => {
   const result = await checkin.execute(req);  
@@ -21,10 +18,16 @@ export const mapCommand = async (req, res) => {
 };
 
 export const whereisCommand = async (req, res) => {
-  console.log("In the command");
-  console.log(req.body);
-  console.log(req);
-  console.log("It's handler time!");
-  const result = await whereis.execute(req);  
+  const slackRequest = req.body as SlackRequest;
+  let result: SlackResponse | null = null;
+  
+  if (slackRequest.command === "/whereis") {    
+    result = await whereis.execute(slackRequest);
+  }
+
+  if(slackRequest.command === "/capacity") {    
+    result = await capacity.execute(slackRequest);
+  }
+  
   res.send(result);
 };

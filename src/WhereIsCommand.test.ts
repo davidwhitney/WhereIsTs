@@ -37,32 +37,71 @@ describe("WhereIsCommand tests", () => {
         const response = await _sut.execute(request);
         expect(response.text).toBe("Sorry! We can't find that place either.");
     });
-
+    
     it("Run_KnownLocation_ReturnsLocation", async () => {
-        const request = ExpectedRequests.WhereIsFor("Foo");
+        const request = { 
+            token: 'Opl3njavAKDxHGtmYjT8N9r7', 
+            team_id: 'TEM9Z8ZU6', 
+            team_domain: 'electric-head', 
+            channel_id: 'CEKQK997V',
+            channel_name: 'general', 
+            user_id: 'UELV368CX', 
+            user_name: 'david', 
+            command: '/whereis', 
+            text: 'Foo', 
+            response_url: 'https://hooks.slack.com/commands/TEM9Z8ZU6/971132768964/LVz2HXEFDOu9Y5S8SR47OgoG', 
+            trigger_id: '973448460599.497339305958.98ea927296b6a810f2c29b2495d1832a' 
+        };
+
         const response = await _sut.execute(request);
         expect(response.text).toBe("Foo");
     });
 
     it("Run_KnownLocation_ReturnsLocationMap", async () => {
-        const request = ExpectedRequests.WhereIsFor("Foo");
-        const response = await _sut.execute(request);
+        const response = await _sut.execute(requestForFoo);
         const attachments = response.attachments || [];
 
         expect(attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
     });
 
     it("Run_KnownLocation_LocationMapHasCaption", async () => {
-        const request = ExpectedRequests.WhereIsFor("Foo");
-        const response = await _sut.execute(request);
+        const response = await _sut.execute(requestForFoo);
         const attachments = response.attachments || [];
         
         expect(attachments[0].text).toBe("Foo is marked on the map.");
     });
 
     it("Run_MisspeltLocation_ReturnsLocation", async () => {
-        const request = ExpectedRequests.WhereIsFor("Fop");
-        const response = await _sut.execute(request);
+        const response = await _sut.execute(requestForFop);
         expect(response.text).toBe("Foo");
     });
 });
+
+
+const requestForFoo = { 
+    token: 'Opl3njavAKDxHGtmYjT8N9r7', 
+    team_id: 'TEM9Z8ZU6', 
+    team_domain: 'electric-head', 
+    channel_id: 'CEKQK997V',
+    channel_name: 'general', 
+    user_id: 'UELV368CX', 
+    user_name: 'david', 
+    command: '/whereis', 
+    text: 'Foo', 
+    response_url: 'https://hooks.slack.com/commands/TEM9Z8ZU6/971132768964/LVz2HXEFDOu9Y5S8SR47OgoG', 
+    trigger_id: '973448460599.497339305958.98ea927296b6a810f2c29b2495d1832a' 
+};
+
+const requestForFop = { 
+    token: 'Opl3njavAKDxHGtmYjT8N9r7', 
+    team_id: 'TEM9Z8ZU6', 
+    team_domain: 'electric-head', 
+    channel_id: 'CEKQK997V',
+    channel_name: 'general', 
+    user_id: 'UELV368CX', 
+    user_name: 'david', 
+    command: '/whereis', 
+    text: 'Fop', 
+    response_url: 'https://hooks.slack.com/commands/TEM9Z8ZU6/971132768964/LVz2HXEFDOu9Y5S8SR47OgoG', 
+    trigger_id: '973448460599.497339305958.98ea927296b6a810f2c29b2495d1832a' 
+};

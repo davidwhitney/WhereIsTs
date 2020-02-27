@@ -10,10 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AppFactory_1 = require("./AppFactory");
-exports.capacityCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield AppFactory_1.capacity.execute(req);
-    res.send(result);
-});
 exports.checkinCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield AppFactory_1.checkin.execute(req);
     res.send(result);
@@ -27,11 +23,14 @@ exports.mapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.send(result);
 });
 exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("In the command");
-    console.log(req.body);
-    console.log(req);
-    console.log("It's handler time!");
-    const result = yield AppFactory_1.whereis.execute(req);
+    const slackRequest = req.body;
+    let result = null;
+    if (slackRequest.command === "/whereis") {
+        result = yield AppFactory_1.whereis.execute(slackRequest);
+    }
+    if (slackRequest.command === "/capacity") {
+        result = yield AppFactory_1.capacity.execute(slackRequest);
+    }
     res.send(result);
 });
 //# sourceMappingURL=index.js.map

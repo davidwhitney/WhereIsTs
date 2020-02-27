@@ -17,12 +17,9 @@ class WhereIsCommand {
         this._urlHelper = urlHelper;
     }
     //[FunctionName("WhereIs")]
-    execute(req) {
+    execute(request) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;
-                const request = req.body;
-                console.log("Request is:" + JSON.stringify(request));
                 const result = this._finder.Find(request.text);
                 if (result == null || result == Location_1.Loc.NotFound) {
                     return SlackResponse_1.SlackResponse.NotFound();
