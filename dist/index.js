@@ -26,7 +26,8 @@ exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
         else if (req.path.indexOf("/map") !== -1) {
             const mapResult = yield AppFactory_1.map.execute(req);
-            result = mapResult.FileContents;
+            res.send(mapResult.FileContents);
+            return;
         }
         else if (req.path.indexOf("/heatmap") !== -1) {
             result = yield AppFactory_1.heatmap.execute(req);

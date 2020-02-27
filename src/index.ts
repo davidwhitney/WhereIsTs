@@ -19,7 +19,8 @@ export const whereisCommand = async (req, res) => {
         result = await capacity.execute(slackRequest);
       } else if(req.path.indexOf("/map") !== -1) {
         const mapResult = await map.execute(req);
-        result = mapResult.FileContents;
+        res.send(mapResult.FileContents);
+        return;        
       } else if(req.path.indexOf("/heatmap") !== -1) {
         result = await heatmap.execute(req); 
       } else if(req.path.indexOf("/check-in") !== -1) {
