@@ -14,6 +14,7 @@ export class Loc implements LocationData {
     constructor(name: string, imageLocation: ImageLocation | null = null, capacity: number = 0) {
         this.Name = name;
         this.ImageLocation = imageLocation || new ImageLocation(0, 0);
+        this.Capacity = capacity;
     }
 
     public RawKey() : string {

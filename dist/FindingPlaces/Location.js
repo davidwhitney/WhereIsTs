@@ -6,6 +6,7 @@ class Loc {
         this.Capacity = 0;
         this.Name = name;
         this.ImageLocation = imageLocation || new ImageLocation_1.ImageLocation(0, 0);
+        this.Capacity = capacity;
     }
     RawKey() {
         return decodeURIComponent(this.Key());

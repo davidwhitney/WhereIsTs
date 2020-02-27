@@ -1,4 +1,4 @@
-import { CapacityCommand } from "./CapacityCommand";
+import { CapacityCommand } from './CapacityCommand';
 import { IUrlHelper } from './Infrastructure/IUrlHelper';
 import { ICapacityService } from './CapacityMonitoring/ICapacityService';
 import { ExpectedRequests } from './TestHelpers/Fakes/ExpectedRequests';
@@ -67,4 +67,18 @@ describe("Capacity command", () => {
         expect(attachments[0].image_url).toBeDefined();
         expect(attachments[0].image_url).toContain("heatmap");
     });
+});
+
+describe("Acceptance test", () => {
+
+    it("Somethings", async () => {
+        const dep = require("./AppFactory");
+        
+        const result = await dep.capacity.execute({
+            text: "gracechurch"
+        });
+
+        expect(result.text).toBe("abc");
+    });
+
 });
