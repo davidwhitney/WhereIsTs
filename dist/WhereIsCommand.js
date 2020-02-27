@@ -23,7 +23,7 @@ class WhereIsCommand {
             if (result == null || result == Location_1.Loc.NotFound) {
                 return SlackResponse_1.SlackResponse.NotFound();
             }
-            const imageUrl = this._urlHelper.ImageFor(result.Key());
+            const imageUrl = this._urlHelper.ImageFor(result.RawKey());
             return SlackResponse_1.SlackResponse.forLocation(result, imageUrl);
         });
     }

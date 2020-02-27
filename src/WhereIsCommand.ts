@@ -21,7 +21,7 @@ export class WhereIsCommand {
             return SlackResponse.NotFound();
         }
 
-        const imageUrl = this._urlHelper.ImageFor(result.Key());
+        const imageUrl = this._urlHelper.ImageFor(result.RawKey());
         return SlackResponse.forLocation(result, imageUrl);
     }
 }
