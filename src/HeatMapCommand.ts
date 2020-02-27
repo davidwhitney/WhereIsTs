@@ -27,7 +27,7 @@ export class HeatMapCommand {
         const highlights: Highlight[] = [];
 
         pointsOfInterest.forEach((poi) => {
-            const location = this._locations.filter(x => x.Key == poi.Key)[0];
+            const location = this._locations.GetByKey(poi.Key());
             const totalAvailableSeats = location.Capacity;
             let locationFromRequest = new LocationFromRequest(poi.RawKey());
             let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
@@ -36,10 +36,9 @@ export class HeatMapCommand {
             const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
 
             const colorGrade = hotness.Rank(percentage);
-
             highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
         });
-
+        
         const outputBytes = await this._generator.HighlightMap(mapKey, highlights);
 
         return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };

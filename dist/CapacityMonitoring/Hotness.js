@@ -12,7 +12,7 @@ class Hotness {
     Rank(percentageUsed) {
         return percentageUsed >= 100
             ? "#FF0000"
-            : Object.getOwnPropertyNames(this._values).filter(x => percentageUsed <= parseInt(x))[0];
+            : this._values[Object.getOwnPropertyNames(this._values).filter(x => percentageUsed <= parseInt(x))[0]];
     }
 }
 exports.Hotness = Hotness;

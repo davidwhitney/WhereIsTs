@@ -25,7 +25,7 @@ class HeatMapCommand {
             const hotness = new Hotness_1.Hotness();
             const highlights = [];
             pointsOfInterest.forEach((poi) => {
-                const location = this._locations.filter(x => x.Key == poi.Key)[0];
+                const location = this._locations.GetByKey(poi.Key());
                 const totalAvailableSeats = location.Capacity;
                 let locationFromRequest = new LocationFromRequest_1.LocationFromRequest(poi.RawKey());
                 let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
