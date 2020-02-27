@@ -19,26 +19,18 @@ export class CapacityCommand {
     }
 
     // Functions SDK method sig garbage goes here
-    async execute(req) {
-        try {
-
-            const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;            
-            if (request.text.trim() === "") {
-                return SlackResponse.NoLocationProvided();
-            }
-
-            const location = new LocationFromRequest(request.text);
-
-            const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
-            const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
-
-            const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
-            const imageUrl = this._urlHelper.CapacityImageFor(location.Value);
-            return new SlackResponse(result, imageUrl);
+    async execute(request: SlackRequest) {
+        if (request.text.trim() === "") {
+            return SlackResponse.NoLocationProvided();
         }
-        catch (ex) {
-            console.log(ex);
-            throw ex;
-        }
+
+        const location = new LocationFromRequest(request.text);
+
+        const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
+        const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
+
+        const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
+        const imageUrl = this._urlHelper.CapacityImageFor(location.Value);
+        return new SlackResponse(result, imageUrl);
     }
 }

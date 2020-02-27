@@ -14,7 +14,6 @@ export class WhereIsCommand {
         this._urlHelper = urlHelper;
     }
 
-    //[FunctionName("WhereIs")]
     async execute(request: SlackRequest) {
         const result = this._finder.Find(request.text);
         if (result == null || result == Loc.NotFound) {

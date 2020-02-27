@@ -16,7 +16,6 @@ class WhereIsCommand {
         this._finder = finder;
         this._urlHelper = urlHelper;
     }
-    //[FunctionName("WhereIs")]
     execute(request) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = this._finder.Find(request.text);

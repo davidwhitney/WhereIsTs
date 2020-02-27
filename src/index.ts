@@ -3,7 +3,7 @@ import { SlackRequest } from './Slack/SlackRequest';
 
 export const whereisCommand = async (req, res) => {
   
-  try { 
+  try {
 
       console.log("Incoming Request:")
       console.log(req.path);
