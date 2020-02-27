@@ -10,26 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AppFactory_1 = require("./AppFactory");
-exports.checkinCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield AppFactory_1.checkin.execute(req);
-    res.send(result);
-});
-exports.heatmapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield AppFactory_1.heatmap.execute(req);
-    res.send(result);
-});
-exports.mapCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield AppFactory_1.map.execute(req);
-    res.send(result);
-});
 exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const slackRequest = req.body;
     let result = null;
     if (slackRequest.command === "/whereis") {
         result = yield AppFactory_1.whereis.execute(slackRequest);
     }
-    if (slackRequest.command === "/capacity") {
+    else if (slackRequest.command === "/capacity") {
         result = yield AppFactory_1.capacity.execute(slackRequest);
+    }
+    else if (req.path.indexOf("/Map") !== -1) {
+        result = yield AppFactory_1.map.execute(req);
+    }
+    else if (req.path.indexOf("/HeatMap") !== -1) {
+        result = yield AppFactory_1.heatmap.execute(req);
+    }
+    else if (req.path.indexOf("/Checkin") !== -1) {
+        result = yield AppFactory_1.checkin.execute(req);
     }
     console.log(result);
     res.send(result);

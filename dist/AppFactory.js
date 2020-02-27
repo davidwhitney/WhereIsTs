@@ -15,12 +15,11 @@ const CapacityCommand_1 = require("./CapacityCommand");
 const Location_1 = require("./FindingPlaces/Location");
 var fs = require('fs');
 const configuration = {
-    UrlRoot: "https://localhost/api",
-    ApiKey: "key123",
-    CapacityApiKey: "",
+    UrlRoot: "https://us-central1-gfktemp.cloudfunctions.net/whereis",
+    ApiKey: "unused",
+    CapacityApiKey: "unused",
     BlobCredentials: "",
-    Root: "",
-    MapPath: ""
+    MapPath: "./App_Data/Maps"
 };
 const capacityRepository = new InMemoryCapacityRepository_1.InMemoryCapacityRepository();
 const locationsjson = fs.readFileSync("./App_Data/locations.json", { encoding: "utf8" });
