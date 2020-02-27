@@ -17,8 +17,8 @@ export class WhereIsCommand {
     //[FunctionName("WhereIs")]
     async execute(req) {
         try {
-            //const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;
-            const request = req.body as SlackRequest;
+            const request = url.parse("http://tempuri.org/?" + req.body, true).query as any as SlackRequest;
+            //const request = req.body as SlackRequest;
             console.log("Request is:" + JSON.stringify(request));
             
             const result = this._finder.Find(request.text);
