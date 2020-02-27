@@ -16,17 +16,12 @@ export class WhereIsCommand {
 
     //[FunctionName("WhereIs")]
     async execute(request: SlackRequest) {
-        try {
-            const result = this._finder.Find(request.text);
-            if (result == null || result == Loc.NotFound) {
-                return SlackResponse.NotFound();
-            }
-
-            const imageUrl = this._urlHelper.ImageFor(result.Key());
-            return SlackResponse.forLocation(result, imageUrl);
-        } catch (ex) {
-            console.log(ex);
-            throw ex;
+        const result = this._finder.Find(request.text);
+        if (result == null || result == Loc.NotFound) {
+            return SlackResponse.NotFound();
         }
+
+        const imageUrl = this._urlHelper.ImageFor(result.Key());
+        return SlackResponse.forLocation(result, imageUrl);
     }
 }

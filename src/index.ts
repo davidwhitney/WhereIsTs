@@ -3,21 +3,35 @@ import { SlackRequest } from './Slack/SlackRequest';
 
 export const whereisCommand = async (req, res) => {
   
-  const slackRequest = req.body as SlackRequest;
-  let result: any = null;
-  
-  if (slackRequest.command === "/whereis") {    
-    result = await whereis.execute(slackRequest);
-  } else if(slackRequest.command === "/capacity") {    
-    result = await capacity.execute(slackRequest);
-  } else if(req.path.indexOf("/Map") !== -1) {
-    result = await map.execute(req);  
-  } else if(req.path.indexOf("/HeatMap") !== -1) {
-    result = await heatmap.execute(req); 
-  } else if(req.path.indexOf("/Checkin") !== -1) {
-    result = await checkin.execute(req);
+  try { 
+
+      console.log("Incoming Request:")
+      console.log(req.path);
+      console.log(req.body);
+      console.log(req.query);
+
+      const slackRequest = req.body as SlackRequest;
+      let result: any = null;
+
+      if (slackRequest.command === "/whereis") {    
+        result = await whereis.execute(slackRequest);
+      } else if(slackRequest.command === "/capacity") {    
+        result = await capacity.execute(slackRequest);
+      } else if(req.path.indexOf("/Map") !== -1) {
+        result = await map.execute(req);  
+      } else if(req.path.indexOf("/HeatMap") !== -1) {
+        result = await heatmap.execute(req); 
+      } else if(req.path.indexOf("/Checkin") !== -1) {
+        result = await checkin.execute(req);
+      }
+
+      console.log(result);
+      res.send(result);
+
+  } catch (ex) {
+    
+      console.error(ex);      
+      res.status(500).send(ex);
   }
-  
-  console.log(result);
-  res.send(result);
+
 };

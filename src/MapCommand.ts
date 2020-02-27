@@ -14,25 +14,19 @@ export class MapCommand {
         this._cache = cache;
     }
 
-    async execute(req) {
-        try {            
-            const mapKey = encodeURIComponent(req.query.key.toLowerCase());
+    async execute(req) {        
+        const mapKey = encodeURIComponent(req.query.key.toLowerCase());
 
-            const location = this._locations.filter(x => x.Key() == mapKey)[0];
-            if (location == null) {
-                return { status: 404 };
-            }
-
-            const outputBytes = await this._cache.GetOrCreate(
-                location.Key(),
-                async (entry) => await this._generator.GetImageFor(location.ImageLocation)
-            );
-
-            return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
-
-        } catch (ex) {
-            console.log(ex);
-            throw ex;
+        const location = this._locations.filter(x => x.Key() == mapKey)[0];
+        if (location == null) {
+            return { status: 404 };
         }
+
+        const outputBytes = await this._cache.GetOrCreate(
+            location.Key(),
+            async (entry) => await this._generator.GetImageFor(location.ImageLocation)
+        );
+
+        return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
     }
 }

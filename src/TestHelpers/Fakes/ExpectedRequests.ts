@@ -12,7 +12,7 @@ export class ExpectedRequests {
     }
     
     public static MapRequestForKey(key: string): any {
-        return { query: `code=someApiKey&key=${key}` };
+        return { query: { raw: `code=someApiKey&key=${key}`, key: key } };
     }
 
     public static WhereIsFor(text: string | null, command: string = "/whereis"): any {

@@ -19,18 +19,12 @@ class WhereIsCommand {
     //[FunctionName("WhereIs")]
     execute(request) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const result = this._finder.Find(request.text);
-                if (result == null || result == Location_1.Loc.NotFound) {
-                    return SlackResponse_1.SlackResponse.NotFound();
-                }
-                const imageUrl = this._urlHelper.ImageFor(result.Key());
-                return SlackResponse_1.SlackResponse.forLocation(result, imageUrl);
+            const result = this._finder.Find(request.text);
+            if (result == null || result == Location_1.Loc.NotFound) {
+                return SlackResponse_1.SlackResponse.NotFound();
             }
-            catch (ex) {
-                console.log(ex);
-                throw ex;
-            }
+            const imageUrl = this._urlHelper.ImageFor(result.Key());
+            return SlackResponse_1.SlackResponse.forLocation(result, imageUrl);
         });
     }
 }

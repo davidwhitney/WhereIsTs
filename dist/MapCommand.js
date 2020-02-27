@@ -17,19 +17,13 @@ class MapCommand {
     }
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const mapKey = encodeURIComponent(req.query.key.toLowerCase());
-                const location = this._locations.filter(x => x.Key() == mapKey)[0];
-                if (location == null) {
-                    return { status: 404 };
-                }
-                const outputBytes = yield this._cache.GetOrCreate(location.Key(), (entry) => __awaiter(this, void 0, void 0, function* () { return yield this._generator.GetImageFor(location.ImageLocation); }));
-                return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
+            const mapKey = encodeURIComponent(req.query.key.toLowerCase());
+            const location = this._locations.filter(x => x.Key() == mapKey)[0];
+            if (location == null) {
+                return { status: 404 };
             }
-            catch (ex) {
-                console.log(ex);
-                throw ex;
-            }
+            const outputBytes = yield this._cache.GetOrCreate(location.Key(), (entry) => __awaiter(this, void 0, void 0, function* () { return yield this._generator.GetImageFor(location.ImageLocation); }));
+            return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
         });
     }
 }

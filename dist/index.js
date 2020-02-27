@@ -11,24 +11,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const AppFactory_1 = require("./AppFactory");
 exports.whereisCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const slackRequest = req.body;
-    let result = null;
-    if (slackRequest.command === "/whereis") {
-        result = yield AppFactory_1.whereis.execute(slackRequest);
+    try {
+        console.log("Incoming Request:");
+        console.log(req.path);
+        console.log(req.body);
+        console.log(req.query);
+        const slackRequest = req.body;
+        let result = null;
+        if (slackRequest.command === "/whereis") {
+            result = yield AppFactory_1.whereis.execute(slackRequest);
+        }
+        else if (slackRequest.command === "/capacity") {
+            result = yield AppFactory_1.capacity.execute(slackRequest);
+        }
+        else if (req.path.indexOf("/Map") !== -1) {
+            result = yield AppFactory_1.map.execute(req);
+        }
+        else if (req.path.indexOf("/HeatMap") !== -1) {
+            result = yield AppFactory_1.heatmap.execute(req);
+        }
+        else if (req.path.indexOf("/Checkin") !== -1) {
+            result = yield AppFactory_1.checkin.execute(req);
+        }
+        console.log(result);
+        res.send(result);
     }
-    else if (slackRequest.command === "/capacity") {
-        result = yield AppFactory_1.capacity.execute(slackRequest);
+    catch (ex) {
+        console.error(ex);
+        res.status(500).send(ex);
     }
-    else if (req.path.indexOf("/Map") !== -1) {
-        result = yield AppFactory_1.map.execute(req);
-    }
-    else if (req.path.indexOf("/HeatMap") !== -1) {
-        result = yield AppFactory_1.heatmap.execute(req);
-    }
-    else if (req.path.indexOf("/Checkin") !== -1) {
-        result = yield AppFactory_1.checkin.execute(req);
-    }
-    console.log(result);
-    res.send(result);
 });
 //# sourceMappingURL=index.js.map

@@ -18,37 +18,30 @@ export class HeatMapCommand {
     }
     
     // [FunctionName("HeatMap")]
-    public execute(req) {
-        try {            
-            const keys = url.parse("http://tempuri.org/?" + req.Query, true).query.key;
-            const mapKey = (<string>keys).toLowerCase();
-            const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
+    public async execute(req) {
 
-            const hotness = new Hotness();
-            const highlights: Highlight[] = [];
+        const mapKey = encodeURIComponent(req.query.key.toLowerCase());
+        const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
 
-            pointsOfInterest.forEach((poi) => {
-                const location = this._locations.filter(x => x.Key == poi.Key)[0];
-                const totalAvailableSeats = location.Capacity;
-                let locationFromRequest = new LocationFromRequest(poi.RawKey());
-                let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
-                filledSeats = filledSeats > totalAvailableSeats ? totalAvailableSeats : filledSeats;
+        const hotness = new Hotness();
+        const highlights: Highlight[] = [];
 
-                const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
+        pointsOfInterest.forEach((poi) => {
+            const location = this._locations.filter(x => x.Key == poi.Key)[0];
+            const totalAvailableSeats = location.Capacity;
+            let locationFromRequest = new LocationFromRequest(poi.RawKey());
+            let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
+            filledSeats = filledSeats > totalAvailableSeats ? totalAvailableSeats : filledSeats;
 
-                const colorGrade = hotness.Rank(percentage);
+            const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
 
-                highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
-            });
+            const colorGrade = hotness.Rank(percentage);
 
-            const outputBytes = this._generator.HighlightMap(mapKey, highlights);
+            highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
+        });
 
-            return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
-        }
-        catch (ex)
-        {
-            console.log(ex);
-            throw ex;
-        }
+        const outputBytes = await this._generator.HighlightMap(mapKey, highlights);
+
+        return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
     }
 }
