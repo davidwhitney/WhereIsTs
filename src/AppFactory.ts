@@ -11,6 +11,7 @@ import { MapCommand } from "./MapCommand";
 import { HeatMapCommand } from "./HeatMapCommand";
 import { CheckInCommand } from "./CheckInCommand";
 import { CapacityCommand } from "./CapacityCommand";
+import { Loc, LocationData } from './FindingPlaces/Location';
 
 var fs = require('fs');
 
@@ -25,9 +26,10 @@ const configuration: Configuration = {
 
 const capacityRepository = new InMemoryCapacityRepository();
 const locationsjson: string = fs.readFileSync("./App_Data/locations.json", { encoding: "utf8" });
-const knownLocations = JSON.parse(locationsjson);
+const knownLocations: LocationData[] = JSON.parse(locationsjson);
+const asLocs = knownLocations.map(ld => new Loc(ld.Name, ld.ImageLocation, ld.Capacity));
 
-const locations = new LocationCollection(...knownLocations);
+const locations = new LocationCollection(...asLocs);
 const locationFinder = new LocationFinder(locations);
 const urlHelper = new UrlHelper(configuration);
 const imageGenerator = new ImageGenerator(configuration);

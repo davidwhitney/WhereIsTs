@@ -1,6 +1,12 @@
 import { ImageLocation } from "./ImageLocation";
 
-export class Loc {
+export interface LocationData {
+    Name: string;
+    Capacity: number;
+    ImageLocation: ImageLocation;
+}
+
+export class Loc implements LocationData {
     public Name: string;
     public Capacity: number = 0;
     public ImageLocation: ImageLocation;
