@@ -8,11 +8,11 @@ export class InMemoryCapacityRepository implements ICapacityRepository {
         this._storage = new Map<string, number>();
     }
 
-    Load(): Map<string, number> {
+    async Load(): Promise<Map<string, number>> {
         return this._storage;
     }
 
-    Save(state: Map<string, number>): void {
+    async Save(state: Map<string, number>): Promise<void> {
         this._storage = state;
     }
     

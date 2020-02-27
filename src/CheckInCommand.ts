@@ -9,26 +9,17 @@ export class CheckInCommand {
         this._capacityService = capacityService;
     }
 
-    // [FunctionName("CheckIn")]
-    // Functions SDK method sig garbage goes here
-    async execute(req) {    
-        try
-        {
-            const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
-            const rawLocation = (<string>request.location) || null;
-            const location = new LocationFromRequest(rawLocation);
-            if (!location.IsValid()) {
-                return { status: 400 };
-            }
+    async execute(req) {   
 
-            this._capacityService.CheckIn(location.Value);
-            
-            return { status: 200, message: "Thanks for checking in!" };
+        const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
+        const rawLocation = (<string>request.location) || null;
+        const location = new LocationFromRequest(rawLocation);
+        if (!location.IsValid()) {
+            return { status: 400 };
         }
-        catch (ex)
-        {
-            console.log(JSON.stringify(ex));
-            throw ex;
-        }
+
+        this._capacityService.CheckIn(location.Value);
+
+        return { status: 200, message: "Thanks for checking in!" };
     }
 }

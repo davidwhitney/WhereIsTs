@@ -24,7 +24,7 @@ export class CapacityCommand {
 
         const location = new LocationFromRequest(request.text);
         const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
-        const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
+        const filledSeats = await this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
 
         const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
         const imageUrl = this._urlHelper.CapacityImageFor(location.Value);

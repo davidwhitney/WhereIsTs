@@ -15,24 +15,16 @@ class CheckInCommand {
     constructor(capacityService) {
         this._capacityService = capacityService;
     }
-    // [FunctionName("CheckIn")]
-    // Functions SDK method sig garbage goes here
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
-                const rawLocation = request.location || null;
-                const location = new LocationFromRequest_1.LocationFromRequest(rawLocation);
-                if (!location.IsValid()) {
-                    return { status: 400 };
-                }
-                this._capacityService.CheckIn(location.Value);
-                return { status: 200, message: "Thanks for checking in!" };
+            const request = url.parse("http://tempuri.org/?" + req.Query, true).query;
+            const rawLocation = request.location || null;
+            const location = new LocationFromRequest_1.LocationFromRequest(rawLocation);
+            if (!location.IsValid()) {
+                return { status: 400 };
             }
-            catch (ex) {
-                console.log(JSON.stringify(ex));
-                throw ex;
-            }
+            this._capacityService.CheckIn(location.Value);
+            return { status: 200, message: "Thanks for checking in!" };
         });
     }
 }

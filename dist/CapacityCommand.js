@@ -24,7 +24,7 @@ class CapacityCommand {
             }
             const location = new LocationFromRequest_1.LocationFromRequest(request.text);
             const totalAvailableSeats = this._locations.TotalCapacityOf(location.Value);
-            const filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
+            const filledSeats = yield this._capacityService.NumberOfDesksOccupiedForLocation(location.Value);
             const result = `There are ${filledSeats} of ${totalAvailableSeats} desks used in ${request.text}.`;
             const imageUrl = this._urlHelper.CapacityImageFor(location.Value);
             return new SlackResponse_1.SlackResponse(result, imageUrl);

@@ -4,7 +4,6 @@ import { Hotness } from './CapacityMonitoring/Hotness';
 import { Highlight } from './ImageGeneration/Highlight';
 import { LocationFromRequest } from './Infrastructure/LocationFromRequest';
 import { IImageGenerator } from './ImageGeneration/IImageGenerator';
-import url = require("url");
 
 export class HeatMapCommand {
     private readonly _locations: LocationCollection;
@@ -22,15 +21,14 @@ export class HeatMapCommand {
         const mapKey = encodeURIComponent(req.query.key.toLowerCase());
         const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
         
-        console.log("Found " + pointsOfInterest.length + " pois for " + mapKey);
         const hotness = new Hotness();
         const highlights: Highlight[] = [];
 
-        pointsOfInterest.forEach((poi) => {
+        pointsOfInterest.forEach(async (poi) => {
             const location = this._locations.GetByKey(poi.Key());
             const totalAvailableSeats = location.Capacity;
             let locationFromRequest = new LocationFromRequest(poi.RawKey());
-            let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
+            let filledSeats = await this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
             filledSeats = filledSeats > totalAvailableSeats ? totalAvailableSeats : filledSeats;
 
             const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
@@ -38,7 +36,7 @@ export class HeatMapCommand {
             const colorGrade = hotness.Rank(percentage);
             highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
         });
-        
+
         const outputBytes = await this._generator.HighlightMap(mapKey, highlights);
 
         return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };

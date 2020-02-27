@@ -21,19 +21,18 @@ class HeatMapCommand {
         return __awaiter(this, void 0, void 0, function* () {
             const mapKey = encodeURIComponent(req.query.key.toLowerCase());
             const pointsOfInterest = this._locations.filter(x => x.RawKey().indexOf(mapKey + "::") == 0);
-            console.log("Found " + pointsOfInterest.length + " pois for " + mapKey);
             const hotness = new Hotness_1.Hotness();
             const highlights = [];
-            pointsOfInterest.forEach((poi) => {
+            pointsOfInterest.forEach((poi) => __awaiter(this, void 0, void 0, function* () {
                 const location = this._locations.GetByKey(poi.Key());
                 const totalAvailableSeats = location.Capacity;
                 let locationFromRequest = new LocationFromRequest_1.LocationFromRequest(poi.RawKey());
-                let filledSeats = this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
+                let filledSeats = yield this._capacityService.NumberOfDesksOccupiedForLocation(locationFromRequest.Value);
                 filledSeats = filledSeats > totalAvailableSeats ? totalAvailableSeats : filledSeats;
                 const percentage = Math.floor(filledSeats / totalAvailableSeats * 100);
                 const colorGrade = hotness.Rank(percentage);
                 highlights.push({ Location: poi.ImageLocation, Colour: colorGrade });
-            });
+            }));
             const outputBytes = yield this._generator.HighlightMap(mapKey, highlights);
             return { status: 200, FileContents: outputBytes, ContentType: "image/jpeg" };
         });

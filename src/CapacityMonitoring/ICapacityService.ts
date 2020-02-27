@@ -1,6 +1,4 @@
-import { LocationFromRequest } from '../Infrastructure/LocationFromRequest';
-
 export interface ICapacityService {
-    NumberOfDesksOccupiedForLocation(location: string): number;
-    CheckIn(compoundKey: string): void;
+    NumberOfDesksOccupiedForLocation(location: string): Promise<number>;
+    CheckIn(compoundKey: string): Promise<void>;
 }

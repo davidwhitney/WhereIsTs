@@ -14,7 +14,7 @@ describe("CapacityService tests", () => {
     it("CheckIn_IncrementsNumberAgainstProvidedLocationKey", async () => {
         _sut.CheckIn("gracechurch::245-210");
 
-        var occupiedCount = _sut.NumberOfDesksOccupiedForLocation("gracechurch");
+        var occupiedCount = await _sut.NumberOfDesksOccupiedForLocation("gracechurch");
 
         expect(occupiedCount).toBe(1);
     });

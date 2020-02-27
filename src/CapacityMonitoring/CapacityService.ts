@@ -9,8 +9,8 @@ export class CapacityService implements ICapacityService {
         this._repo = capacityRepository;
     }
 
-    NumberOfDesksOccupiedForLocation(location: string): number {
-        var state = this._repo.Load();
+    async NumberOfDesksOccupiedForLocation(location: string): Promise<number> {
+        var state = await this._repo.Load();
 
         const valuesInThisRegion: number[] = [];
         const keysInThisRegion = Array.from(state.keys()).filter(x => x.toLowerCase().indexOf(location) == 0);
@@ -19,8 +19,8 @@ export class CapacityService implements ICapacityService {
         return valuesInThisRegion.reduce((total: number, next: number) => total + next, 0);
     }
 
-    CheckIn(compoundKey: string): void {
-        var state = this._repo.Load();    
+    async CheckIn(compoundKey: string): Promise<void> {
+        var state = await this._repo.Load();    
        
         console.log(state);
         if (!state.has(compoundKey)) {
