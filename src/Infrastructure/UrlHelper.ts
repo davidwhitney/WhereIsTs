@@ -12,11 +12,11 @@ export class UrlHelper implements IUrlHelper {
     }
 
     public ImageFor(locationKey: string): string {        
-        return `${this._config.UrlRoot}/Map?code=${this._config.ApiKey}&key=${encodeURI(locationKey)}`;
+        return `${this._config.UrlRoot}/map?key=${encodeURI(locationKey)}`;
     }
 
     public CapacityImageFor(locationKey: string): string {
         const utcNow = Math.floor((new Date()).getTime() / 1000);
-        return `${this._config.UrlRoot}/HeatMap?code=${this._config.CapacityApiKey}&key=${encodeURI(locationKey)}&ticks=${utcNow}`;
+        return `${this._config.UrlRoot}/heatmap?key=${encodeURI(locationKey)}&ticks=${utcNow}`;
     }
 }

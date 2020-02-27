@@ -8,11 +8,11 @@ class UrlHelper {
         this._config = config;
     }
     ImageFor(locationKey) {
-        return `${this._config.UrlRoot}/Map?code=${this._config.ApiKey}&key=${encodeURI(locationKey)}`;
+        return `${this._config.UrlRoot}/map?key=${encodeURI(locationKey)}`;
     }
     CapacityImageFor(locationKey) {
         const utcNow = Math.floor((new Date()).getTime() / 1000);
-        return `${this._config.UrlRoot}/HeatMap?code=${this._config.CapacityApiKey}&key=${encodeURI(locationKey)}&ticks=${utcNow}`;
+        return `${this._config.UrlRoot}/heatmap?key=${encodeURI(locationKey)}&ticks=${utcNow}`;
     }
 }
 exports.UrlHelper = UrlHelper;

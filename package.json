@@ -8,7 +8,7 @@
     "test": "jest",
     "build": "tsc",
     "add-dist": "git add dist .",
-    "watch": "tsc-watch  --onSuccess \"npm run whereis\"",
+    "watch": "tsc-watch --onSuccess \"npm run whereis\"",
     "whereis": "functions-framework --target=whereisCommand",
     "map": "functions-framework --target=mapCommand",
     "checkin": "functions-framework --target=checkinCommand",

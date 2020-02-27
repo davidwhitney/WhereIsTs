@@ -17,7 +17,6 @@ class HeatMapCommand {
         this._generator = generator;
         this._capacityService = capacityService;
     }
-    // [FunctionName("HeatMap")]
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
             const mapKey = encodeURIComponent(req.query.key.toLowerCase());

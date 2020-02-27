@@ -28,8 +28,7 @@ describe("Capacity command", () => {
             UrlRoot: "https://localhost/api", 
             ApiKey: "key123", 
             CapacityApiKey: "", 
-            BlobCredentials: "", 
-            Root: "", 
+            BlobCredentials: "",
             MapPath: ""
         }; // MAKE THIS SMALLER.
 
@@ -66,6 +65,6 @@ describe("Capacity command", () => {
         const attachments = response.attachments || [];
 
         expect(attachments[0].image_url).toBeDefined();
-        expect(attachments[0].image_url).toContain("HeatMap");
+        expect(attachments[0].image_url).toContain("heatmap");
     });
 });

@@ -60,7 +60,7 @@ describe("WhereIsCommand tests", () => {
         const response = await _sut.execute(requestForFoo);
         const attachments = response.attachments || [];
 
-        expect(attachments[0].image_url).toBe("https://localhost/api/Map?code=key123&key=foo");
+        expect(attachments[0].image_url).toBe("https://localhost/api/map?key=foo");
     });
 
     it("Run_KnownLocation_LocationMapHasCaption", async () => {

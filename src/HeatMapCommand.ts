@@ -17,7 +17,6 @@ export class HeatMapCommand {
         this._capacityService = capacityService;
     }
     
-    // [FunctionName("HeatMap")]
     public async execute(req) {
 
         const mapKey = encodeURIComponent(req.query.key.toLowerCase());
