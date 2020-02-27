@@ -16,12 +16,11 @@ import { Loc, LocationData } from './FindingPlaces/Location';
 var fs = require('fs');
 
 const configuration: Configuration = { 
-  UrlRoot: "https://localhost/api", 
-  ApiKey: "key123", 
-  CapacityApiKey: "", 
-  BlobCredentials: "", 
-  Root: "", 
-  MapPath: ""
+  UrlRoot: "https://us-central1-gfktemp.cloudfunctions.net/whereis", 
+  ApiKey: "unused", 
+  CapacityApiKey: "unused", 
+  BlobCredentials: "",
+  MapPath: "./App_Data/Maps"
 };
 
 const capacityRepository = new InMemoryCapacityRepository();

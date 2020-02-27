@@ -22,8 +22,7 @@ describe("WhereIsCommand tests", () => {
             UrlRoot: "https://localhost/api", 
             ApiKey: "key123", 
             CapacityApiKey: "", 
-            BlobCredentials: "", 
-            Root: "", 
+            BlobCredentials: "",
             MapPath: ""
         }; // MAKE THIS SMALLER.
 
