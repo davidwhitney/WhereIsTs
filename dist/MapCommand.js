@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const url = require("url");
 class MapCommand {
     constructor(locations, generator, cache) {
         this._locations = locations;
@@ -19,8 +18,7 @@ class MapCommand {
     execute(req) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const keys = url.parse("http://tempuri.org/?" + req.Query, true).query.key;
-                const mapKey = encodeURIComponent(keys.toLowerCase());
+                const mapKey = encodeURIComponent(req.query.key.toLowerCase());
                 const location = this._locations.filter(x => x.Key() == mapKey)[0];
                 if (location == null) {
                     return { status: 404 };

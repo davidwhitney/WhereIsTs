@@ -11,7 +11,7 @@ class ExpectedRequests {
         return { Query: `location=${location}` };
     }
     static MapRequestForKey(key) {
-        return { Query: `code=someApiKey&key=${key}` };
+        return { query: `code=someApiKey&key=${key}` };
     }
     static WhereIsFor(text, command = "/whereis") {
         var encodedText = encodeURI(text || "");

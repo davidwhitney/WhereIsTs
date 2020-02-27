@@ -15,10 +15,8 @@ export class MapCommand {
     }
 
     async execute(req) {
-        try {
-            
-            const keys = url.parse("http://tempuri.org/?" + req.Query, true).query.key;
-            const mapKey = encodeURIComponent((<string>keys).toLowerCase());
+        try {            
+            const mapKey = encodeURIComponent(req.query.key.toLowerCase());
 
             const location = this._locations.filter(x => x.Key() == mapKey)[0];
             if (location == null) {
