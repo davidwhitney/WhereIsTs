@@ -21,7 +21,14 @@ describe("GCP storage", () => {
 
     it("can save it's state", async ()=> {
         _sut.overriddenStorageFileName = "unittestfile.json";
-        await _sut.Save();
+
+        const map = await _sut.Load();
+        map.set("testKey", 1000);
+
+        await _sut.Save(map);
+        const reloaded = await _sut.Load();
+
+        expect(reloaded.get("testKey")).toBe(1000);
     });
 
     it("is", async () => {

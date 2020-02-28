@@ -16,21 +16,20 @@ export class GcpCapacityRepository implements ICapacityRepository {
     }
 
     public async Load(): Promise<Map<string, number>> {
-        const path = this.getFileName();
         const bucket = await this._storage.bucket(this._config.BlobCredentials);
         const file = await bucket.file(this.getFileName());
         const exists = (await file.exists())[0];
         if (!exists) {
             this.Save(new Map<string, number>());
         }
+
         const response = await file.download();
         const contents = response[0].toString();
-        console.log(contents);
-        return JSON.parse(contents) as Map<string, number>;
+        return new Map<string, number>(JSON.parse(contents));
     }
 
-    public async Save(state: Map<string, number>): Promise<void> {
-        const asString = JSON.stringify(state);        
+    public async Save(state: Map<string, number>) {
+        const asString = JSON.stringify(Array.from(state.entries()));;
         await this.upload(asString);
     }
 
@@ -42,10 +41,10 @@ export class GcpCapacityRepository implements ICapacityRepository {
     }
 
     private async upload(contents: string) {
-        const tmpPath = "" + this.getFileName();
-        
+        const tmpPath = "./tmp/" + this.getFileName();
+        fs.writeFileSync(tmpPath, contents);
         const bucket = await this._storage.bucket(this._config.BlobCredentials);
-        const result = await bucket.upload(contents, {
+        await bucket.upload(tmpPath, {
             gzip: true,
             metadata: {
                 destination: this.getFileName(),
@@ -53,6 +52,5 @@ export class GcpCapacityRepository implements ICapacityRepository {
             }
         });
     }
-    
 }
 

@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const storage_1 = require("@google-cloud/storage");
+const fs = require("fs");
 class GcpCapacityRepository {
     constructor(config) {
         this._config = config;
@@ -18,7 +19,6 @@ class GcpCapacityRepository {
     }
     Load() {
         return __awaiter(this, void 0, void 0, function* () {
-            const path = this.getFileName();
             const bucket = yield this._storage.bucket(this._config.BlobCredentials);
             const file = yield bucket.file(this.getFileName());
             const exists = (yield file.exists())[0];
@@ -27,13 +27,13 @@ class GcpCapacityRepository {
             }
             const response = yield file.download();
             const contents = response[0].toString();
-            console.log(contents);
-            return JSON.parse(contents);
+            return new Map(JSON.parse(contents));
         });
     }
     Save(state) {
         return __awaiter(this, void 0, void 0, function* () {
-            const asString = JSON.stringify(state);
+            const asString = JSON.stringify(Array.from(state.entries()));
+            ;
             yield this.upload(asString);
         });
     }
@@ -45,9 +45,10 @@ class GcpCapacityRepository {
     }
     upload(contents) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tmpPath = "" + this.getFileName();
+            const tmpPath = "./tmp/" + this.getFileName();
+            fs.writeFileSync(tmpPath, contents);
             const bucket = yield this._storage.bucket(this._config.BlobCredentials);
-            const result = yield bucket.upload(contents, {
+            yield bucket.upload(tmpPath, {
                 gzip: true,
                 metadata: {
                     destination: this.getFileName(),
