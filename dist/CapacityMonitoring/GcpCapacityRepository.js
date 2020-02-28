@@ -10,23 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const storage_1 = require("@google-cloud/storage");
-const fs = require("fs");
 class GcpCapacityRepository {
     constructor(config) {
         this._config = config;
         this._storage = new storage_1.Storage();
-    }
-    getFileName() {
-        return "temp.json"; // utcnow
+        this.overriddenStorageFileName = "";
     }
     Load() {
         return __awaiter(this, void 0, void 0, function* () {
-            const path = yield this.downloadFile();
-            let contents = fs.readFileSync(path, { encoding: "utf8" });
-            if (contents === "") {
+            const path = this.getFileName();
+            const bucket = yield this._storage.bucket(this._config.BlobCredentials);
+            const file = yield bucket.file(this.getFileName());
+            const exists = (yield file.exists())[0];
+            if (!exists) {
                 this.Save(new Map());
-                contents = fs.readFileSync(path, { encoding: "utf8" });
             }
+            const response = yield file.download();
+            const contents = response[0].toString();
             console.log(contents);
             return JSON.parse(contents);
         });
@@ -34,22 +34,25 @@ class GcpCapacityRepository {
     Save(state) {
         return __awaiter(this, void 0, void 0, function* () {
             const asString = JSON.stringify(state);
+            yield this.upload(asString);
         });
     }
-    downloadFile() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const tmpPath = "./tmp/" + this.getFileName();
-            yield this._storage.bucket(this._config.BlobCredentials).file(this.getFileName()).download({ destination: tmpPath });
-            return tmpPath;
-        });
+    getFileName() {
+        if (this.overriddenStorageFileName != "") {
+            return this.overriddenStorageFileName;
+        }
+        return new Date().toISOString().split("T")[0] + ".json";
     }
-    uploadFile() {
+    upload(contents) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tmpPath = "./tmp/" + this.getFileName();
+            const tmpPath = "" + this.getFileName();
             const bucket = yield this._storage.bucket(this._config.BlobCredentials);
-            const result = yield bucket.upload(tmpPath, {
+            const result = yield bucket.upload(contents, {
                 gzip: true,
-                metadata: { cacheControl: 'no-cache' }
+                metadata: {
+                    destination: this.getFileName(),
+                    cacheControl: 'no-cache',
+                }
             });
         });
     }
